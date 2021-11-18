@@ -6,10 +6,13 @@ import com.projectJava.Hylife.User.Entity.Users;
 import com.projectJava.Hylife.User.Repository.RoleRepository;
 import com.projectJava.Hylife.User.Repository.UserRepository;
 import com.projectJava.Hylife.User.Service.UserDetailsImpl;
+import com.projectJava.Hylife.User.Service.UserDetailsServiceImpl;
 import com.projectJava.Hylife.User.common.ERole;
 import com.projectJava.Hylife.User.common.JwtUtils;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,14 +23,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.sql.Timestamp;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*",maxAge = 3600)
 @RestController
-@RequestMapping("/api/user")
+@RequestMapping("/api")
 public class UserControler  {
 
     @Autowired
@@ -45,7 +47,10 @@ public class UserControler  {
     @Autowired
     JwtUtils jwtUtils;
 
-    @PostMapping("/login")
+    @Autowired
+    UserDetailsServiceImpl userDetailsService;
+
+    @PostMapping("/user/login")
     public ResponseEntity<?> authenticateUser(@Validated @RequestBody LoginRequest loginRequest){
         if(!userRepository.existsByEmail(loginRequest.getEmail())){
             return ResponseEntity
@@ -66,8 +71,8 @@ public class UserControler  {
                     .collect(Collectors.toList());
             users.setLogin_token(jwt);
             return ResponseEntity.ok(new JwtResponse(
-                    200L,
                     jwt,
+                    200L,
                     "Login successfully",
                     userDetails.getId(),
                     userDetails.getEmail(),
@@ -76,18 +81,25 @@ public class UserControler  {
         }
     }
     
-    @PostMapping("/createUser")
+    @PostMapping("/user/createUser")
     public ResponseEntity<?> registerUser(@Validated @RequestBody SignupRequest signupRequest){
         if(userRepository.existsByEmail(signupRequest.getEmail())){
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse(" Email is already taken!"));
         }
-        Users users = new Users(signupRequest.getEmail(),
-               passwordEncoder.encode(signupRequest.getPassword()));
+        if(signupRequest.getStatus()){
+            int status = 1;
+        }else{
+            int status = 0;
+        }
+        Timestamp createdAt = signupRequest.getCreatedAt();
+
         Set<String> strRole = signupRequest.getRole();
+
+
         Set<Roles> roles = new HashSet<>();
-        
+
         if(strRole == null){
             Roles userRole = roleRepository.findByName(ERole.User)
                     .orElseThrow(() -> new RuntimeException(" Role is not found."));
@@ -95,21 +107,43 @@ public class UserControler  {
         }else{
             strRole.forEach(role-> {
                 switch (role){
-                    case "Admin" :
+                    case "Admin":
                         Roles adminRoles = roleRepository.findByName(ERole.Admin)
                                 .orElseThrow(() -> new RuntimeException(" Role is not found."));
                         roles.add(adminRoles);
                         break;
-                    default:
+                    case "User":
                         Roles userRole = roleRepository.findByName(ERole.User)
                                 .orElseThrow(() -> new RuntimeException(" Role is not found."));
                         roles.add(userRole);
+                        break;
+                    default:
+                        ResponseEntity.ok(new MessageResponse("Role is not found!"));
+                        break;
                 }
             });
         }
+        Users users = new Users(
+                signupRequest.getEmail(),
+                passwordEncoder.encode(signupRequest.getPassword()),
+                roles,
+                signupRequest.getStatus(),
+                createdAt
+        );
         users.setRoles(roles);
         userRepository.save(users);
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+//
+//    @DeleteMapping("/delete/{id}")
+//    public String deleteUser(@PathVariable(name = "id") Integer id){
+//        Set<Roles> roles = new HashSet<>();
+//        userRepository.deleteById(id);
+//        return "Success";
+//    }
 
+    @GetMapping("/admin/test")
+    public  String admin(){
+        return "error";
+    }
 }

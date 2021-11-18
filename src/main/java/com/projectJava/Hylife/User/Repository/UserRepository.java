@@ -2,6 +2,7 @@ package com.projectJava.Hylife.User.Repository;
 
 import com.projectJava.Hylife.User.Entity.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<Users,Integer>{
+public interface UserRepository extends JpaRepository<Users,Integer> {
 
     /**
      * Find email by email user
@@ -22,4 +23,6 @@ public interface UserRepository extends JpaRepository<Users,Integer>{
      * @return Boolean
      */
     Boolean existsByEmail(String email);
+
+
 }

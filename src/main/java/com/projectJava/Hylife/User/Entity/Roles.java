@@ -38,4 +38,5 @@ public class Roles extends BaseEntity {
 
     public Roles() {
     }
+
 }

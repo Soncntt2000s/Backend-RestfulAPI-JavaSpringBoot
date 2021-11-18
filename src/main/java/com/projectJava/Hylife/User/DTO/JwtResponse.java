@@ -11,9 +11,9 @@ public class JwtResponse {
     private String type = "Bearer";
     private final List<String> role;
 
-    public JwtResponse( Long responseCode,String accessToken,String message,Integer id,String email, List<String> role) {
-        this.responseCode = responseCode;
+    public JwtResponse(String accessToken, Long responseCode,String message,Integer id,String email, List<String> role) {
         this.token = accessToken;
+        this.responseCode = responseCode;
         this.message = message;
         this.id = id;
         this.role = role;

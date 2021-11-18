@@ -3,32 +3,34 @@ package com.projectJava.Hylife.User.Entity;
 import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users",uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 @Getter
 @Setter
-public class Users extends BaseEntity {
+public class Users implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", columnDefinition = "int(11)")
     private Integer id;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id")
-            , inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id",columnDefinition = "int(11) NOT NULL")
+            , inverseJoinColumns = @JoinColumn(name = "role_id",columnDefinition = "int(11) NOT NULL"))
     private Set<Roles> roles = new HashSet<>();
 
     @Column(name = "status", columnDefinition = "tinyint(1)")
-    private Integer status;
+    private Boolean status;
 
     @Column(name = "email", columnDefinition = "varchar(255)")
     private String email;
@@ -39,6 +41,14 @@ public class Users extends BaseEntity {
     @Column(name = "login_token", columnDefinition = "varchar(255)", nullable = true)
     private String login_token;
 
+    @CreatedDate
+    @Column(name = "created_at",columnDefinition = "Timestamp default CURRENT_TIMESTAMP()")
+    private Timestamp createdAt;
+
+    @LastModifiedDate
+    @Column(name = "updated_at",columnDefinition = "Timestamp default NULL")
+    private Timestamp updatedAt;
+
     public Users() {
     }
 
@@ -47,4 +57,11 @@ public class Users extends BaseEntity {
         this.password = password;
     }
 
+    public Users(String email, String password, Set<Roles> roles, Boolean status, Timestamp createdAt) {
+        this.roles = roles;
+        this.status = status;
+        this.email = email;
+        this.password = password;
+        this.createdAt = createdAt;
+    }
 }

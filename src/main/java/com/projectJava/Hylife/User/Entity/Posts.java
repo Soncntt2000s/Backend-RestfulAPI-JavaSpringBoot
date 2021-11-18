@@ -20,7 +20,7 @@ public class Posts extends BaseEntity {
     @NotNull
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",columnDefinition = "int(11)")
-    private int id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "catagory_id",referencedColumnName = "id",columnDefinition = "int(11)")

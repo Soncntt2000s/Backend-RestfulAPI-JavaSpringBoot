@@ -22,7 +22,8 @@ public class UserDetailsImpl implements UserDetails {
 
     public Collection<? extends GrantedAuthority> authorities;
 
-    public UserDetailsImpl(Integer id, String email, String password, Collection<? extends GrantedAuthority> authorities) {
+    public UserDetailsImpl(Integer id, String email, String password,
+                           Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -40,6 +41,8 @@ public class UserDetailsImpl implements UserDetails {
                 authorities
         );
     }
+
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,6 +1,7 @@
 package com.projectJava.Hylife.User.DTO;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.Set;
 
 public class SignupRequest {
@@ -8,6 +9,16 @@ public class SignupRequest {
     private String email;
     private String password;
     private Set<String> role;
+    private Timestamp createdAt;
+    private Boolean status;
+
+    public SignupRequest(String email, String password, Boolean status, Set<String> role, Timestamp createdAt) {
+        this.email = email;
+        this.password = password;
+        this.role = role;
+        this.createdAt = createdAt;
+        this.status = status;
+    }
 
     public String getEmail() {
         return email;
@@ -27,6 +38,22 @@ public class SignupRequest {
 
     public Set<String> getRole() {
         return this.role;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
     }
 
     public void setRole(Set<String> role) {
