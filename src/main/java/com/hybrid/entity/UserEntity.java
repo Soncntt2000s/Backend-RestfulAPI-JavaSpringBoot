@@ -1,37 +1,47 @@
 package com.hybrid.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "users")
-public class UserEntity extends BaseEntity{
-	@Column(name = "role_id")
-	private int roleId;
-	
-	@Column
+public class UserEntity extends BaseEntity {
+
+	@Column(columnDefinition = "tinyint(1) NOT NULL")
 	private int status;
-	
-	@Column
+
+	@Column(columnDefinition = "varchar(255) NOT NULL")
 	private String email;
-	
-	@Column(name = "username")
-	private String userName;
-	
-	@Column
+
+	@Column(columnDefinition = "varchar(255) NOT NULL")
 	private String password;
-	
-	@Column(name = "login_token")
+
+	@Column(columnDefinition = "varchar(255) NULL")
 	private String loginToken;
 
-	public int getRoleId() {
-		return roleId;
-	}
+	@OneToMany(mappedBy = "user")
+	private List<PostEntity> post = new ArrayList<>();
 
-	public void setRoleId(int roleId) {
-		this.roleId = roleId;
-	}
+	@OneToMany(mappedBy = "user")
+	private List<CommentEntity> comment = new ArrayList<>();
+
+	@ManyToMany
+	@JoinTable(name = "user_role",
+	joinColumns = @JoinColumn(name = "user_id", columnDefinition = "int NOT NULL"),
+	inverseJoinColumns = @JoinColumn(name = "role_id", columnDefinition = "int NOT NULL"))
+	private List<RoleEntity> roles = new ArrayList<>();
+	
+	@OneToOne(mappedBy = "user")
+    private UserProfileEntity userProfile;
 
 	public int getStatus() {
 		return status;
@@ -49,14 +59,6 @@ public class UserEntity extends BaseEntity{
 		this.email = email;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
 	public String getPassword() {
 		return password;
 	}
@@ -71,6 +73,38 @@ public class UserEntity extends BaseEntity{
 
 	public void setLoginToken(String loginToken) {
 		this.loginToken = loginToken;
-	}	
-	
+	}
+
+	public List<PostEntity> getPost() {
+		return post;
+	}
+
+	public void setPost(List<PostEntity> post) {
+		this.post = post;
+	}
+
+	public List<CommentEntity> getComment() {
+		return comment;
+	}
+
+	public void setComment(List<CommentEntity> comment) {
+		this.comment = comment;
+	}
+
+	public List<RoleEntity> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<RoleEntity> roles) {
+		this.roles = roles;
+	}
+
+	public UserProfileEntity getUserProfile() {
+		return userProfile;
+	}
+
+	public void setUserProfile(UserProfileEntity userProfile) {
+		this.userProfile = userProfile;
+	}
+
 }

@@ -1,34 +1,34 @@
-package com.hybrid.dto;
+package com.hybrid.request;
 
 import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
-public class NewPasswordDTO {
+public class PasswordRequest {
 	
 	@Length(min = 8, max = 255, message = "new password length between 8 and 255")
 	@NotEmpty(message = "Please input new password")
-	private String newPassword;
+	private String password;
 	
 	@Length(min = 8, max = 255, message = "confirm password length between 8 and 255")
 	@NotEmpty(message = "Please input confirm password")
-	private String confirmNewPassword;
+	private String confirmPassword;
 	
 	private String token;
 
-	public String getNewPassword() {
-		return newPassword;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setNewPassword(String newPassword) {
-		this.newPassword = newPassword;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getConfirmNewPassword() {
-		return confirmNewPassword;
+	public String getConfirmPassword() {
+		return confirmPassword;
 	}
 
-	public void setConfirmNewPassword(String confirmNewPassword) {
-		this.confirmNewPassword = confirmNewPassword;
+	public void setConfirmPassword(String confirmPassword) {
+		this.confirmPassword = confirmPassword;
 	}
 
 	public String getToken() {

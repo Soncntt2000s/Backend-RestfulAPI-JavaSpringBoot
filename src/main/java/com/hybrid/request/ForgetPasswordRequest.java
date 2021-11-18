@@ -1,11 +1,11 @@
-package com.hybrid.dto;
+package com.hybrid.request;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import org.hibernate.validator.constraints.Length;
 
-public class EmailDTO {
+public class ForgetPasswordRequest {
 	@NotEmpty(message = "email không được để trống")
 	@Email(message = "Email không đúng định dạng")
 	@Length(max = 255, message = "Email không được dài hơn 255 ký tự")

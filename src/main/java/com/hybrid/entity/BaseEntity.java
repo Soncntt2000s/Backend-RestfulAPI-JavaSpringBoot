@@ -8,16 +8,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+
 @MappedSuperclass
 public abstract class BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@Column
+	@Column(columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
 	private Date createdAt;
 	
-	@Column
+	@Column(columnDefinition = "timestamp NULL DEFAULT NULL")
 	private Date updatedAt;
 
 	public int getId() {
@@ -39,4 +40,5 @@ public abstract class BaseEntity {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
 }

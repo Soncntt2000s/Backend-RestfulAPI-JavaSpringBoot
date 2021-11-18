@@ -1,6 +1,6 @@
-package com.hybrid.dto;
+package com.hybrid.response;
 
-public class BaseDataDTO<T> extends BaseDTO{
+public class BaseDataResponse<T> extends BaseResponse{
 	private T data;
 	
 		public T getData() {
