@@ -51,100 +51,100 @@ public class UserProfileEntity extends BaseEntity{
 	@JoinColumn(name="department_id", nullable=false, columnDefinition = "tinyint(2)")
     private DepartmentEntity department;
 
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
-
-	public String getFullname() {
-		return fullname;
-	}
-
-	public void setFullname(String fullname) {
-		this.fullname = fullname;
-	}
-
-	public Date getBirthday() {
-		return birthday;
-	}
-
-	public void setBirthday(Date birthday) {
-		this.birthday = birthday;
-	}
-
-	public int getGender() {
-		return gender;
-	}
-
-	public void setGender(int gender) {
-		this.gender = gender;
-	}
-
-	public String getNumberPhone() {
-		return numberPhone;
-	}
-
-	public void setNumberPhone(String numberPhone) {
-		this.numberPhone = numberPhone;
-	}
-
-	public String getFacebook() {
-		return facebook;
-	}
-
-	public void setFacebook(String facebook) {
-		this.facebook = facebook;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getUrlImgAvata() {
-		return urlImgAvata;
-	}
-
-	public void setUrlImgAvata(String urlImgAvata) {
-		this.urlImgAvata = urlImgAvata;
-	}
-
-	public UserEntity getUser() {
-		return user;
-	}
-
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
-
-	public PositionEntity getPosition() {
-		return position;
-	}
-
-	public void setPosition(PositionEntity position) {
-		this.position = position;
-	}
-
-	public BranchEntity getBranch() {
-		return branch;
-	}
-
-	public void setBranch(BranchEntity branch) {
-		this.branch = branch;
-	}
-
-	public DepartmentEntity getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(DepartmentEntity department) {
-		this.department = department;
-	}
+//	public int getStatus() {
+//		return status;
+//	}
+//
+//	public void setStatus(int status) {
+//		this.status = status;
+//	}
+//
+//	public String getFullname() {
+//		return fullname;
+//	}
+//
+//	public void setFullname(String fullname) {
+//		this.fullname = fullname;
+//	}
+//
+//	public Date getBirthday() {
+//		return birthday;
+//	}
+//
+//	public void setBirthday(Date birthday) {
+//		this.birthday = birthday;
+//	}
+//
+//	public int getGender() {
+//		return gender;
+//	}
+//
+//	public void setGender(int gender) {
+//		this.gender = gender;
+//	}
+//
+//	public String getNumberPhone() {
+//		return numberPhone;
+//	}
+//
+//	public void setNumberPhone(String numberPhone) {
+//		this.numberPhone = numberPhone;
+//	}
+//
+//	public String getFacebook() {
+//		return facebook;
+//	}
+//
+//	public void setFacebook(String facebook) {
+//		this.facebook = facebook;
+//	}
+//
+//	public String getDescription() {
+//		return description;
+//	}
+//
+//	public void setDescription(String description) {
+//		this.description = description;
+//	}
+//
+//	public String getUrlImgAvata() {
+//		return urlImgAvata;
+//	}
+//
+//	public void setUrlImgAvata(String urlImgAvata) {
+//		this.urlImgAvata = urlImgAvata;
+//	}
+//
+//	public UserEntity getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(UserEntity user) {
+//		this.user = user;
+//	}
+//
+//	public PositionEntity getPosition() {
+//		return position;
+//	}
+//
+//	public void setPosition(PositionEntity position) {
+//		this.position = position;
+//	}
+//
+//	public BranchEntity getBranch() {
+//		return branch;
+//	}
+//
+//	public void setBranch(BranchEntity branch) {
+//		this.branch = branch;
+//	}
+//
+//	public DepartmentEntity getDepartment() {
+//		return department;
+//	}
+//
+//	public void setDepartment(DepartmentEntity department) {
+//		this.department = department;
+//	}
 
 }

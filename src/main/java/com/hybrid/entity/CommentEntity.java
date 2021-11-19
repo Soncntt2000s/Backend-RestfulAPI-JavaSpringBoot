@@ -5,6 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "comments")
 public class CommentEntity extends BaseEntity{
@@ -24,44 +29,44 @@ public class CommentEntity extends BaseEntity{
 	@ManyToOne()
     private UserEntity user;
 
-	public int getCommentParentId() {
-		return commentParentId;
-	}
-
-	public void setCommentParentId(int commentParentId) {
-		this.commentParentId = commentParentId;
-	}
-
-	public int getLikeNumber() {
-		return likeNumber;
-	}
-
-	public void setLikeNumber(int likeNumber) {
-		this.likeNumber = likeNumber;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public PostEntity getPost() {
-		return post;
-	}
-
-	public void setPost(PostEntity post) {
-		this.post = post;
-	}
-
-	public UserEntity getUser() {
-		return user;
-	}
-
-	public void setUser(UserEntity user) {
-		this.user = user;
-	}
+//	public int getCommentParentId() {
+//		return commentParentId;
+//	}
+//
+//	public void setCommentParentId(int commentParentId) {
+//		this.commentParentId = commentParentId;
+//	}
+//
+//	public int getLikeNumber() {
+//		return likeNumber;
+//	}
+//
+//	public void setLikeNumber(int likeNumber) {
+//		this.likeNumber = likeNumber;
+//	}
+//
+//	public String getContent() {
+//		return content;
+//	}
+//
+//	public void setContent(String content) {
+//		this.content = content;
+//	}
+//
+//	public PostEntity getPost() {
+//		return post;
+//	}
+//
+//	public void setPost(PostEntity post) {
+//		this.post = post;
+//	}
+//
+//	public UserEntity getUser() {
+//		return user;
+//	}
+//
+//	public void setUser(UserEntity user) {
+//		this.user = user;
+//	}
 	
 }

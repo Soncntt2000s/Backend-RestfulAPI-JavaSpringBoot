@@ -18,6 +18,7 @@ import com.hybrid.service.IAuthorizerService;
 public class AuthorizerServiceImpl  implements IAuthorizerService{
 
 	private final Logger logger = LoggerFactory.getLogger(AuthorizerServiceImpl.class);
+	//chưa config logger
 	 
     @Override
     public boolean authorize(Authentication authentication, String action, Object callerObj) {

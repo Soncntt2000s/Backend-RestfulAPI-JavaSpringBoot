@@ -1,6 +1,6 @@
 package com.hybrid.entity;
 
-import java.util.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
@@ -8,7 +8,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @MappedSuperclass
 public abstract class BaseEntity {
 	@Id
@@ -16,29 +20,9 @@ public abstract class BaseEntity {
 	private int id;
 	
 	@Column(columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
-	private Date createdAt;
+	private Timestamp createdAt;
 	
 	@Column(columnDefinition = "timestamp NULL DEFAULT NULL")
-	private Date updatedAt;
-
-	public int getId() {
-		return id;
-	}
-
-	public Date getCreatedAt() {
-		return createdAt;
-	}
-
-	public void setCreatedAt(Date createdAt) {
-		this.createdAt = createdAt;
-	}
-
-	public Date getUpdatedAt() {
-		return updatedAt;
-	}
-
-	public void setUpdatedAt(Date updatedAt) {
-		this.updatedAt = updatedAt;
-	}
+	private Timestamp updatedAt;
 
 }

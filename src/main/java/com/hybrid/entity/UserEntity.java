@@ -12,8 +12,14 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+
 @Entity
 @Table(name = "users")
+@Getter
+@Setter
 public class UserEntity extends BaseEntity {
 
 	@Column(columnDefinition = "tinyint(1) NOT NULL")
@@ -43,68 +49,68 @@ public class UserEntity extends BaseEntity {
 	@OneToOne(mappedBy = "user")
     private UserProfileEntity userProfile;
 
-	public int getStatus() {
-		return status;
-	}
+//	public int getStatus() {
+//		return status;
+//	}
+//
+//	public void setStatus(int status) {
+//		this.status = status;
+//	}
+//
+//	public String getEmail() {
+//		return email;
+//	}
+//
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
 
-	public void setStatus(int status) {
-		this.status = status;
-	}
+//	public String getPassword() {
+//		return password;
+//	}
+//
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getLoginToken() {
-		return loginToken;
-	}
-
-	public void setLoginToken(String loginToken) {
-		this.loginToken = loginToken;
-	}
-
-	public List<PostEntity> getPost() {
-		return post;
-	}
-
-	public void setPost(List<PostEntity> post) {
-		this.post = post;
-	}
-
-	public List<CommentEntity> getComment() {
-		return comment;
-	}
-
-	public void setComment(List<CommentEntity> comment) {
-		this.comment = comment;
-	}
-
-	public List<RoleEntity> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<RoleEntity> roles) {
-		this.roles = roles;
-	}
-
-	public UserProfileEntity getUserProfile() {
-		return userProfile;
-	}
-
-	public void setUserProfile(UserProfileEntity userProfile) {
-		this.userProfile = userProfile;
-	}
+//	public String getLoginToken() {
+//		return loginToken;
+//	}
+//
+//	public void setLoginToken(String loginToken) {
+//		this.loginToken = loginToken;
+//	}
+//
+//	public List<PostEntity> getPost() {
+//		return post;
+//	}
+//
+//	public void setPost(List<PostEntity> post) {
+//		this.post = post;
+//	}
+//
+//	public List<CommentEntity> getComment() {
+//		return comment;
+//	}
+//
+//	public void setComment(List<CommentEntity> comment) {
+//		this.comment = comment;
+//	}
+//
+//	public List<RoleEntity> getRoles() {
+//		return roles;
+//	}
+//
+//	public void setRoles(List<RoleEntity> roles) {
+//		this.roles = roles;
+//	}
+//
+//	public UserProfileEntity getUserProfile() {
+//		return userProfile;
+//	}
+//
+//	public void setUserProfile(UserProfileEntity userProfile) {
+//		this.userProfile = userProfile;
+//	}
 
 }

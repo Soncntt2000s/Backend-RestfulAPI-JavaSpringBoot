@@ -8,6 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "position")
 public class PositionEntity extends BaseEntity{
@@ -21,28 +26,28 @@ public class PositionEntity extends BaseEntity{
 	@OneToMany(mappedBy = "position")
 	private List<UserProfileEntity> userProfile = new ArrayList<>();
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<UserProfileEntity> getUserProfile() {
-		return userProfile;
-	}
-
-	public void setUserProfile(List<UserProfileEntity> userProfile) {
-		this.userProfile = userProfile;
-	}
+//	public String getName() {
+//		return name;
+//	}
+//
+//	public void setName(String name) {
+//		this.name = name;
+//	}
+//
+//	public String getDescription() {
+//		return description;
+//	}
+//
+//	public void setDescription(String description) {
+//		this.description = description;
+//	}
+//
+//	public List<UserProfileEntity> getUserProfile() {
+//		return userProfile;
+//	}
+//
+//	public void setUserProfile(List<UserProfileEntity> userProfile) {
+//		this.userProfile = userProfile;
+//	}
 	
 }

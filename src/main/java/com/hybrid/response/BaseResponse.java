@@ -6,9 +6,7 @@ public class BaseResponse {
 	
 	private int responseCode;
 	
-	private String message;public BaseResponse() {
-		// TODO Auto-generated constructor stub
-	}
+	private String message;
 	
 	@JsonProperty("response_code")
 	public int getReponseCode() {

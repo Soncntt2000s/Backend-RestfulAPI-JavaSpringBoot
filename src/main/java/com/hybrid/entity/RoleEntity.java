@@ -8,6 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "roles")
 public class RoleEntity extends BaseEntity{
@@ -21,28 +26,28 @@ public class RoleEntity extends BaseEntity{
 	@ManyToMany(mappedBy = "roles")
     private List<UserEntity> Users = new ArrayList<>();
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<UserEntity> getUsers() {
-		return Users;
-	}
-
-	public void setUsers(List<UserEntity> users) {
-		Users = users;
-	}
+//	public String getName() {
+//		return name;
+//	}
+//
+//	public void setName(String name) {
+//		this.name = name;
+//	}
+//
+//	public String getDescription() {
+//		return description;
+//	}
+//
+//	public void setDescription(String description) {
+//		this.description = description;
+//	}
+//
+//	public List<UserEntity> getUsers() {
+//		return Users;
+//	}
+//
+//	public void setUsers(List<UserEntity> users) {
+//		Users = users;
+//	}
 	
 }

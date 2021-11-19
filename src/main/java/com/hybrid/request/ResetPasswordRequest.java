@@ -3,7 +3,7 @@ package com.hybrid.request;
 import javax.validation.constraints.NotEmpty;
 import org.hibernate.validator.constraints.Length;
 
-public class PasswordRequest {
+public class ResetPasswordRequest {
 	
 	@Length(min = 8, max = 255, message = "new password length between 8 and 255")
 	@NotEmpty(message = "Please input new password")

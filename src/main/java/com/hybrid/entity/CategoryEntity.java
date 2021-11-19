@@ -8,6 +8,11 @@ import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 @Entity
 @Table(name = "categories")
 public class CategoryEntity extends BaseEntity {
@@ -24,36 +29,36 @@ public class CategoryEntity extends BaseEntity {
 	@OneToMany(mappedBy = "category")
 	private List<PostEntity> post = new ArrayList<>();
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public int getCategoryParentId() {
-		return categoryParentId;
-	}
-
-	public void setCategoryParentId(int categoryParentId) {
-		this.categoryParentId = categoryParentId;
-	}
-
-	public String getSlug() {
-		return slug;
-	}
-
-	public void setSlug(String slug) {
-		this.slug = slug;
-	}
-
-	public List<PostEntity> getPost() {
-		return post;
-	}
-
-	public void setPost(List<PostEntity> post) {
-		this.post = post;
-	}
+//	public String getName() {
+//		return name;
+//	}
+//
+//	public void setName(String name) {
+//		this.name = name;
+//	}
+//
+//	public int getCategoryParentId() {
+//		return categoryParentId;
+//	}
+//
+//	public void setCategoryParentId(int categoryParentId) {
+//		this.categoryParentId = categoryParentId;
+//	}
+//
+//	public String getSlug() {
+//		return slug;
+//	}
+//
+//	public void setSlug(String slug) {
+//		this.slug = slug;
+//	}
+//
+//	public List<PostEntity> getPost() {
+//		return post;
+//	}
+//
+//	public void setPost(List<PostEntity> post) {
+//		this.post = post;
+//	}
 
 }

@@ -16,7 +16,7 @@ import com.hybrid.entity.ForgotPasswordEntity;
 import com.hybrid.entity.UserEntity;
 import com.hybrid.repository.ForgotPasswordRepository;
 import com.hybrid.repository.UserRepository;
-import com.hybrid.request.PasswordRequest;
+import com.hybrid.request.ResetPasswordRequest;
 import com.hybrid.response.BaseResponse;
 
 @Service
@@ -33,48 +33,26 @@ public class UserService {
     public BaseResponse forgotPassword(String token, String email){
     	BaseResponse baseResponse = new BaseResponse();
         UserEntity userEntity = userRepo.findOneByEmail(email);
-        ForgotPasswordEntity forgotPass = new ForgotPasswordEntity();
         if (userEntity != null) {
+        	ForgotPasswordEntity forgotPass = new ForgotPasswordEntity();
         	forgotPass.setEmail(email);
         	forgotPass.setToken(token);
-        	System.out.println(forgotPass.getCreatedAt());
         	forgotRepo.save(forgotPass);
-        	String resetPasswordLink = "/reset_password?token=" + token;
             try {
-    			sendEmail(email, resetPasswordLink);
+    			sendEmail(email, "/reset_password?token=" + token);
     		} catch (UnsupportedEncodingException | MessagingException e) {
-    			// TODO Auto-generated catch block
-    			e.printStackTrace();
+    			baseResponse.setReponseCode(500);
+                baseResponse.setMessage("Server error");
+                return baseResponse;
     		}
             baseResponse.setReponseCode(200);
-            baseResponse.setMessage("Confirmation successfully, please check mail");
+            baseResponse.setMessage("Confirmation successfully");
         } else {
         	baseResponse.setReponseCode(401);
-        	baseResponse.setMessage("Email is empty. Please input the email");
+        	baseResponse.setMessage("Email does not exists");
         }
         return baseResponse;
-    }
-    
-    
-//    if(userService.updateResetPasswordToken(token, email)==true)
-//    {
-//        String resetPasswordLink = "/reset_password?token=" + token;
-//        try {
-//			sendEmail(email, resetPasswordLink);
-//		} catch (UnsupportedEncodingException | MessagingException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//        baseDTO.setreponse_code(200);
-//		baseDTO.setMessage("Confirmation successfully, please check mail");
-//    }
-//    else
-//    {
-//    	baseDTO.setreponse_code(401);
-//		baseDTO.setMessage("Email is empty. Please input the email");
-//    }
-//    return baseDTO;
-    
+    }    
      
     public ForgotPasswordEntity getResetPasswordToken(String token) {
     
@@ -84,27 +62,25 @@ public class UserService {
     
     public UserEntity getUser(String email)
     {
-    	UserEntity userEntity = userRepo.findOneByEmail(email);
-    	return userEntity;
+    	return userRepo.findOneByEmail(email);
     }
      
-    public BaseResponse updatePassword(PasswordRequest passRequest) {
+    public BaseResponse resetPassword(ResetPasswordRequest passRequest) {
     	BaseResponse baseResponse = new BaseResponse();
     	String password = passRequest.getPassword();
-    	String token = passRequest.getToken();
     	String confirmPassword = passRequest.getConfirmPassword();
     	if(password .equals(confirmPassword)) //đã valid password anh cofirm not null
 	    {
+    		String token = passRequest.getToken();
 	    	ForgotPasswordEntity forgotPasswordEntity = getResetPasswordToken(token);
 	    	if (forgotPasswordEntity == null) {
 	    		baseResponse.setReponseCode(401);
-	    		baseResponse.setMessage("Not find email");
+	    		baseResponse.setMessage("Token does not exists");
 		    } else {
 		    	UserEntity userEntity = getUser(forgotPasswordEntity.getEmail());
 		    	BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		        String encodedPassword = passwordEncoder.encode(password);
 		        userEntity.setPassword(encodedPassword);
-		        //customer.setResetPasswordToken(null);
 		        forgotRepo.deleteById(forgotPasswordEntity.getId());
 		        userRepo.save(userEntity);
 		        baseResponse.setReponseCode(200);
@@ -125,7 +101,7 @@ public class UserService {
 	    MimeMessage message = mailSender.createMimeMessage();              
 	    MimeMessageHelper helper = new MimeMessageHelper(message);
 	     
-	    helper.setFrom("contact@shopme.com", "Shopme Support");
+	    helper.setFrom("contact@shopme.com", "HyLift support");
 	    helper.setTo(recipientEmail);
 	     
 	    String subject = "Here's the link to reset your password";
