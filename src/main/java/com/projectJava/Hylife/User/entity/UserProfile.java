@@ -28,7 +28,7 @@ public class UserProfile extends BaseEntity {
     @JoinColumn(name = "position_id",referencedColumnName = "id",columnDefinition = "int(11)")
     private Positions positionsId;
 
-    @Column(name = "public_status",columnDefinition = "varchar(255)")
+    @Column(name = "public_status",columnDefinition = "tinyint(1)")
     private Boolean publicStatus;
 
     @Column(name = "full_name",columnDefinition = "varchar(255)")

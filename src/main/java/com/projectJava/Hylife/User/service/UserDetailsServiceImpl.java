@@ -76,7 +76,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             List<String> roles = userDetails.getAuthorities().stream()
                     .map(GrantedAuthority::getAuthority)
                     .collect(Collectors.toList());
-            System.out.println(jwtUtils.getEmailFromJwtToken(jwt));
             return ResponseEntity.ok(new JwtResponse(
                     jwt,
                     200L,
@@ -118,7 +117,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 
         Set<Roles> roles = new HashSet<>();
-
         if (strRole == null) {
             Roles userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException(" Role is not found."));

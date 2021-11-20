@@ -1,16 +1,18 @@
 package com.projectJava.Hylife.User.entity;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "positions")
 @Getter
 @Setter
-public class Positions extends BaseEntity{
+public class Positions implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
