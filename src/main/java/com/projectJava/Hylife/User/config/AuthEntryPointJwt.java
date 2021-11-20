@@ -22,7 +22,7 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint {
 
         logger.error("Unauthorized error: {}",authException.getMessage());
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED,"Error : Unauthorized");
-        //HttpServletResponse.SC_UNAUTHORIZED chính là lỗi 401
+        //HttpServletResponse.SC_UNAUTHORIZED trả về lỗi 401
 
     }
 }

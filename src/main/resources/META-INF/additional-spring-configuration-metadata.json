@@ -9,11 +9,6 @@
       "name": "bezkoder.app.jwtExpirationMs",
       "type": "java.lang.String",
       "description": "Description for bezkoder.app.jwtExpirationMs."
-    },
-    {
-      "name": "file.dir",
-      "type": "java.lang.String",
-      "description": "Description for file.dir."
     }
   ]
 }
