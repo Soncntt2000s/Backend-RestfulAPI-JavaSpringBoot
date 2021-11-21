@@ -3,6 +3,8 @@ package com.projectJava.Hylife.User.service;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.projectJava.Hylife.User.entity.Roles;
 import com.projectJava.Hylife.User.entity.Users;
+import com.projectJava.Hylife.User.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +21,7 @@ public class UserDetailsImpl implements UserDetails {
     private  String email;
     @JsonIgnore
     private String password;
+
 
     public Collection<? extends GrantedAuthority> authorities;
 

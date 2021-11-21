@@ -7,6 +7,8 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "positions")
@@ -18,6 +20,9 @@ public class Positions implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id",columnDefinition = "int(11)")
     private Integer id;
+
+    @OneToMany(mappedBy = "positions",fetch = FetchType.LAZY)
+    private Set<UserProfile> userProfile = new HashSet<>();
 
     @Column(name = "name",columnDefinition = "varchar(255)")
     private String name;

@@ -1,44 +1,85 @@
 package com.projectJava.Hylife.User.request;
 
-import com.projectJava.Hylife.User.entity.Branchs;
-
-import java.awt.*;
+import java.sql.Timestamp;
+import java.time.DateTimeException;
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.Set;
 
 public class UserProfileRequest {
 
     private String accessToken;
     private String fullName;
-    private LocalDate birthday;
+    private Timestamp birthday;
     private Boolean publicStatic;
     private String facebook;
     private String numberPhone;
     private Boolean gender;
-    private Set<String> branchs;
-    private Set<String> departments;
-    private Set<String> positions;
-    private TextArea description;
+    private String branches;
+    private String departments;
+    private String positions;
+    private String description;
+    private String nameImage;
+    private Timestamp updatedAt;
 
-    public UserProfileRequest(String accessToken, String fullName, LocalDate birthday, Boolean publicStatic,
-                              String facebook, String numberPhone, Boolean gender, Set<String> branchs,
-                              Set<String> departments, Set<String> positions, TextArea description)
+    public UserProfileRequest(String accessToken, String fullName, Boolean publicStatic,Timestamp birthday,
+                              String facebook,  Boolean gender, String branches,String numberPhone,String description,
+                              String departments, String positions,Timestamp updatedAt,String nameImage)
     {
         this.accessToken = accessToken;
         this.fullName = fullName;
-        this.birthday = birthday;
         this.publicStatic = publicStatic;
+        this.birthday = birthday;
         this.facebook = facebook;
-        this.numberPhone = numberPhone;
         this.gender = gender;
-        this.branchs = branchs;
+        this.branches = branches;
+        this.numberPhone = numberPhone;
+        this.description = description;
         this.departments = departments;
         this.positions = positions;
-        this.description = description;
+        this.updatedAt = updatedAt;
+        this.nameImage = nameImage;
     }
 
     public UserProfileRequest() {
+    }
+
+    public String getNameImage() {
+        return nameImage;
+    }
+
+    public void setNameImage(String nameImage) {
+        this.nameImage = nameImage;
+    }
+
+    public Timestamp getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Timestamp birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getNumberPhone() {
+        return numberPhone;
+    }
+
+    public void setNumberPhone(String numberPhone) {
+        this.numberPhone = numberPhone;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public String getAccessToken() {
@@ -57,13 +98,6 @@ public class UserProfileRequest {
         this.fullName = fullName;
     }
 
-    public LocalDate getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDate birthday) {
-        this.birthday = birthday;
-    }
 
     public Boolean getPublicStatic() {
         return publicStatic;
@@ -81,14 +115,6 @@ public class UserProfileRequest {
         this.facebook = facebook;
     }
 
-    public String getNumberPhone() {
-        return numberPhone;
-    }
-
-    public void setNumberPhone(String numberPhone) {
-        this.numberPhone = numberPhone;
-    }
-
     public Boolean getGender() {
         return gender;
     }
@@ -97,35 +123,28 @@ public class UserProfileRequest {
         this.gender = gender;
     }
 
-    public Set<String> getBranchs() {
-        return branchs;
+    public String getBranches() {
+        return branches;
     }
 
-    public void setBranchs(Set<String> branchs) {
-        this.branchs = branchs;
+    public void setBranches(String branches) {
+        this.branches = branches;
     }
 
-    public Set<String> getDepartments() {
+    public String getDepartments() {
         return departments;
     }
 
-    public void setDepartments(Set<String> departments) {
+    public void setDepartments(String departments) {
         this.departments = departments;
     }
 
-    public Set<String> getPositions() {
+    public String getPositions() {
         return positions;
     }
 
-    public void setPositions(Set<String> positions) {
+    public void setPositions(String positions) {
         this.positions = positions;
     }
 
-    public TextArea getDescription() {
-        return description;
-    }
-
-    public void setDescription(TextArea description) {
-        this.description = description;
-    }
 }

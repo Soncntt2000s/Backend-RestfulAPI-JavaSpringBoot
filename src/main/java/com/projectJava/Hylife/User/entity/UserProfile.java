@@ -6,14 +6,19 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.awt.*;
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "user_profiles")
 @Getter
 @Setter
-public class UserProfile extends BaseEntity {
+public class UserProfile implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,9 +29,9 @@ public class UserProfile extends BaseEntity {
     @JoinColumn(name = "user_id",referencedColumnName = "id",columnDefinition = "int(11)")
     private Users users;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "position_id",referencedColumnName = "id",columnDefinition = "int(11)")
-    private Positions positionsId;
+    private Positions positions ;
 
     @Column(name = "public_status",columnDefinition = "tinyint(1)")
     private Boolean publicStatus;
@@ -35,18 +40,18 @@ public class UserProfile extends BaseEntity {
     private String fullName;
 
     @Column(name = "birthday",columnDefinition = "datetime")
-    private LocalDate birthday;
+    private Timestamp birthday;
 
     @Column(name = "gender",columnDefinition = "tinyint(1)")
     private Boolean gender;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "branch_id",referencedColumnName = "id",columnDefinition = "int(11)")
-    private Branchs branchId;
+    private Branchs branch;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id",referencedColumnName = "id",columnDefinition = "int(11)")
-    private Departments departmentId;
+    private Departments department;
 
     @Column(name = "number_phone",columnDefinition = "varchar(11)")
     private String numberPhone;
@@ -55,29 +60,40 @@ public class UserProfile extends BaseEntity {
     private String facebook;
 
     @Column(name = "description",columnDefinition = "text default NULL",nullable = true)
-    private TextArea description;
+    private String description;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "imageavatar_id",referencedColumnName = "id",columnDefinition = "varchar(255)")
     private FileImageDB imgAvatar;
 
-    public UserProfile(Users users, Positions positionsId, Boolean publicStatus, String fullName, LocalDate birthday,
-                       Boolean gender, Branchs branchId, Departments departmentId, String numberPhone,
-                       String facebook, TextArea description, FileImageDB imgAvatar) {
-        this.users = users;
-        this.positionsId = positionsId;
+    @Column(name = "created_at",columnDefinition = "timestamp default CURRENT_TIMESTAMP()")
+    private Timestamp createdAt;
+
+    @Column(name = "updated_at",columnDefinition = "timestamp default NULL")
+    private Timestamp updatedAt;
+
+
+    public UserProfile( Positions positions, Boolean publicStatus, String fullName,
+                       Boolean gender, Branchs branch, Departments department,String numberPhone,
+                       String facebook,String description,Timestamp birthday,FileImageDB nameImage) {
+
+        this.positions = positions;
         this.publicStatus = publicStatus;
         this.fullName = fullName;
-        this.birthday = birthday;
         this.gender = gender;
-        this.branchId = branchId;
-        this.departmentId = departmentId;
+        this.branch = branch;
+        this.department = department;
         this.numberPhone = numberPhone;
         this.facebook = facebook;
         this.description = description;
-        this.imgAvatar = imgAvatar;
+        this.birthday = birthday;
+        this.imgAvatar = nameImage;
     }
 
     public UserProfile() {
+    }
+
+    public UserProfile(Users users) {
+        this.users = users;
     }
 }

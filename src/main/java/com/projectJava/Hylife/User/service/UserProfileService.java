@@ -1,6 +1,7 @@
 package com.projectJava.Hylife.User.service;
 
 import com.projectJava.Hylife.User.entity.UserProfile;
+import com.projectJava.Hylife.User.entity.Users;
 import com.projectJava.Hylife.User.request.UserProfileRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -10,7 +11,13 @@ import java.util.Optional;
 
 public interface UserProfileService {
 
-    public ResponseEntity<?> updateProfileUser(@Validated @RequestBody UserProfileRequest userProfileRequest );
+    UserProfile updateProfileUserById(@Validated @RequestBody UserProfileRequest userProfileRequest );
 
     public ResponseEntity<?> getProfileUser(@Validated @RequestBody UserProfileRequest userProfileRequest );
+
+    UserProfile insertUserProfile(UserProfileRequest userProfileRequest);
+
+
+
+
 }
