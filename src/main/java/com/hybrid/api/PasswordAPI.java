@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hybrid.request.ChangePasswordRequest;
 import com.hybrid.request.ForgetPasswordRequest;
 import com.hybrid.request.ResetPasswordRequest;
 import com.hybrid.response.BaseResponse;
@@ -36,6 +37,11 @@ public class PasswordAPI {
 		return userService.resetPassword(resetPasswordRequest);
 	}
 	
+	@PostMapping("/api/change_password")
+	public BaseResponse changePassword(@Valid @RequestBody ChangePasswordRequest changePasswordRequest) {
+		return userService.changePassword(changePasswordRequest);
+	}
+	
 	
 	//Đoạn code này dùng để bắt lỗi valid request
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
@@ -43,7 +49,7 @@ public class PasswordAPI {
 	public BaseResponse handleValidationExceptions(
 	  MethodArgumentNotValidException ex) {
 		BaseResponse baseDTO = new BaseResponse();
-	    baseDTO.setReponseCode(400);
+	    baseDTO.setReponseCode(401);
 	    //Map<String, String> errors = new HashMap<>();
 //	    ex.getBindingResult().getAllErrors().forEach((error) -> {
 //	        //String fieldName = ((FieldError) error).getField();

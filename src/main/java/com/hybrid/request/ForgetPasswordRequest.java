@@ -8,9 +8,9 @@ import org.hibernate.validator.constraints.Length;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class ForgetPasswordRequest {
-	@NotEmpty(message = "email không được để trống")
-	@Email(message = "Email không đúng định dạng")
-	@Length(max = 255, message = "Email không được dài hơn 255 ký tự")
+	@NotEmpty(message = "Please input email")
+	@Email(message = "Please input the correct email format")
+	@Length(max = 255, message = "Please input email max 255 characters")
 	private String email;
 
 	public String getEmail() {
