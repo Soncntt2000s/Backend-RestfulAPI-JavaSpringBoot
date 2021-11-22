@@ -26,13 +26,13 @@ public class UserProfileController {
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public ResponseEntity<?> updateProfile(@Validated @RequestBody UserProfileRequest userProfileRequest){
         userProfileServiceImpl.updateProfileUserById(userProfileRequest);
-        return ResponseEntity.ok(new MessageResponse("Update Profile Successfully !", 200));
+        return ResponseEntity.ok(new MessageResponse("Update Profile Successfully !", 200L));
     }
 
     @PostMapping("/")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createUserProfile(@RequestBody UserProfileRequest userProfileRequest){
         userProfileServiceImpl.insertUserProfile(userProfileRequest);
-        return ResponseEntity.ok(new MessageResponse("SUCCESSFULLY",200));
+        return ResponseEntity.ok(new MessageResponse("SUCCESSFULLY",200L));
     }
 }

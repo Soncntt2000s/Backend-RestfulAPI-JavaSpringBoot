@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "catagories")
@@ -22,15 +24,15 @@ public class Catagories extends BaseEntity{
     @NotNull
     private String name;
 
-    @ManyToOne
+    @OneToMany
     @JoinColumn(name = "catagory_parent_id",referencedColumnName = "id"
             ,columnDefinition = "int(11) default NULL",nullable = true)
-    private Catagories catagories;
+    private Set<Catagories> catagories = new HashSet<>();
 
     @Column(name = "slug",columnDefinition = "varchar(255)")
     private String slug;
 
-    public Catagories(Integer id, String name, Catagories catagories, String slug) {
+    public Catagories(Integer id, String name, Set<Catagories> catagories, String slug) {
         this.id = id;
         this.name = name;
         this.catagories = catagories;

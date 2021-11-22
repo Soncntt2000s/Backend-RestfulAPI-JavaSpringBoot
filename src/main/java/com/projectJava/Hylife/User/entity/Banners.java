@@ -4,12 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "banners")
 @Getter
 @Setter
-public class Banners extends BaseEntity {
+public class Banners implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,12 +27,18 @@ public class Banners extends BaseEntity {
     @Column(name = "url_img",columnDefinition = "varchar(255)")
     private String urlImg;
 
+    @Column(name = "created_at",columnDefinition = "timestamp default CURRENT_TIMESTAMP()")
+    private Timestamp createdAt;
 
-    public Banners(Integer id, String title, String content, String urlImg) {
-        this.id = id;
+    @Column(name = "updated_at",columnDefinition = "timestamp default NULL")
+    private Timestamp updatedAt;
+
+
+    public Banners(String title, String content, String urlImg,Timestamp createdAt) {
         this.title = title;
         this.content = content;
         this.urlImg = urlImg;
+        this.createdAt = createdAt;
     }
 
     public Banners() {

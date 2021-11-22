@@ -64,7 +64,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if(!userRepository.existsByEmail(loginRequest.getEmail())){
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse(" Email is not already taken on DB!",401));
+                    .body(new MessageResponse(" Email is not already taken on DB!",401L));
         }else {
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getEmail()
@@ -94,9 +94,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         );
         String jwt = jwtUtils.generateJwtToken(authentication);
         if(jwtUtils.getEmailFromJwtToken(jwt).equals(authentication.getName())){
-            ResponseEntity.ok(new MessageResponse(authentication.getName(),200));
+            ResponseEntity.ok(new MessageResponse(authentication.getName(),200L));
         }
-        return ResponseEntity.ok(new MessageResponse(authentication.getName(),400));
+        return ResponseEntity.ok(new MessageResponse(authentication.getName(),400L));
     }
 
     @Transactional
@@ -104,7 +104,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
             return ResponseEntity
                     .badRequest()
-                    .body(new MessageResponse(" Email is already taken!", 401));
+                    .body(new MessageResponse(" Email is already taken!", 401L));
         }
         if (signupRequest.getStatus()) {
             int status = 1;
@@ -135,7 +135,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                         roles.add(userRole);
                         break;
                     default:
-                        ResponseEntity.ok(new MessageResponse("Role is not found!", 400));
+                        ResponseEntity.ok(new MessageResponse("Role is not found!", 400L));
                         break;
                 }
             });
@@ -149,7 +149,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         );
         users.setRoles(roles);
         userRepository.save(users);
-        return ResponseEntity.ok(new MessageResponse("User registered successfully!", 200));
+        return ResponseEntity.ok(new MessageResponse("User registered successfully!", 200L));
     }
 
 

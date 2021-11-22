@@ -9,9 +9,9 @@ public class MessageResponse {
     private String message;
 
     @JsonIgnore
-    private Integer responseCode;
+    private Long responseCode;
 
-    public MessageResponse(String message,Integer responseCode) {
+    public MessageResponse(String message,Long responseCode) {
         this.message = message;
         this.responseCode = responseCode;
     }
@@ -24,11 +24,11 @@ public class MessageResponse {
         this.message = message;
     }
 
-    public Integer getResponseCode() {
+    public Long getResponseCode() {
         return responseCode;
     }
 
-    public void setResponseCode(Integer responseCode) {
+    public void setResponseCode(Long responseCode) {
         this.responseCode = responseCode;
     }
 }

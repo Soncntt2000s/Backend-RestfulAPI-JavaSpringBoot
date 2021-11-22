@@ -54,12 +54,12 @@ public class FileImageDBServiceImpl implements FileImageDBService{
         {
             fileImageDBService.store(file);
             message = "Uploaded the file successfully: " + file.getOriginalFilename();
-            return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse(message,200));
+            return ResponseEntity.status(HttpStatus.OK).body(new MessageResponse(message,200L));
         }
         catch (Exception e)
         {
             message = "Could not upload the file: " + file.getOriginalFilename() + "!";
-            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new MessageResponse(message,401));
+            return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new MessageResponse(message,401L));
         }
     }
 
