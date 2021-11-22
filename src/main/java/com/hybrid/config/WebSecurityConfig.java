@@ -59,7 +59,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers(HttpMethod.POST,"/api/login","api/forgot_password").permitAll()
                 //.antMatchers("/api/*").access("hasRole('admin', 'user')")
-                .antMatchers("/api/admin/*").access("hasRole('admin')")
+                .antMatchers("/api/*").access("hasAnyRole('ROLE_user', 'ROLE_admin')")
+                .antMatchers("/api/admin/*").access("hasRole('ROLE_admin')")
                 .anyRequest().authenticated();
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable();
