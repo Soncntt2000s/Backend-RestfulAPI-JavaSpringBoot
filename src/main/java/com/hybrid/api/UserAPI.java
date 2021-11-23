@@ -22,23 +22,25 @@ public class UserAPI {
     private ModelMapper modelMapper;
 
     @Autowired
-    private UserService userService;
+    private IUserService iUserService;
 
     /*
    Create user by check role user or admin to add Database
     */
     @PostMapping("/create-user")
     public BaseResponse createUser(@RequestBody UserRequest userRequest){
-        if(userService.checkExistEmail(userRequest.getEmail())){
+        if(iUserService.checkExistEmail(userRequest.getEmail())){
             BaseResponse baseResponse = new BaseResponse();
             baseResponse.setReponseCode(400);
             baseResponse.setMessage("Email is already exist");
+            System.out.println("xac thuc email " + baseResponse);
             return baseResponse;
         }
-        userService.createUser(userRequest);
+        iUserService.createUser(userRequest);
         BaseResponse baseResponse = new BaseResponse();
         baseResponse.setReponseCode(200);
-        baseResponse.setMessage("SUCCESFULLY");
+        baseResponse.setMessage("xac thuc thanh cong " + "SUCCESFULLY");
+        System.out.println(baseResponse);
         return baseResponse;
     }
 }

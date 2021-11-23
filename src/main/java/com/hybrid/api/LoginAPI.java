@@ -65,7 +65,7 @@ public class LoginAPI {
 		List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
 				.collect(Collectors.toList());
 		roles.forEach((element) -> {
-			System.out.println(element);
+			System.out.println("day la gi ? " + element);
 		});
 		// users.setLogin_token(jwt);
 		return jwt;

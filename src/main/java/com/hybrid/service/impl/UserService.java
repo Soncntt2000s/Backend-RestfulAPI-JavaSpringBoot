@@ -166,10 +166,12 @@ public class UserService implements IUserService {
     	return baseResponse;
     }
 
+	@Override
 	public Boolean checkExistEmail(String email){
 		return userRepo.existsByEmail(email);
 	}
 
+	@Override
 	public UserEntity createUser(UserRequest userRequest) {
 		Set<String> stringRole = userRequest.getRole();
 		Set<RoleEntity> roles = new HashSet<>();
