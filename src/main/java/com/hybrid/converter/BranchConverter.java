@@ -28,12 +28,9 @@ public class BranchConverter {
 		return branchEntity;
 	}
 
-	public BranchEntity toUpdateBranhEntity(BranchRequest branchRequest, Integer id)
-	{
-		BranchEntity branchEntity = new BranchEntity();
-		branchEntity.setName(branchRequest.getName());
-		branchEntity.setDescription(branchRequest.getDescription());
-		branchEntity.setId(id);
-		return branchEntity;
+	public static BranchEntity toUpdateEntity(BranchRequest branchRequest, BranchEntity oldBranchEntity) {
+		oldBranchEntity.setName(branchRequest.getName());
+		oldBranchEntity.setDescription(branchRequest.getDescription());
+		return oldBranchEntity;
 	}
 }

@@ -22,7 +22,7 @@ public class CategoryEntity extends BaseEntity {
 	private String name;
 
 	@Column(columnDefinition = "int(11) NULL")
-	private int categoryParentId;
+	private Integer categoryParentId;
 
 	@Column(columnDefinition = "varchar(255) NOT NULL")
 	private String slug;

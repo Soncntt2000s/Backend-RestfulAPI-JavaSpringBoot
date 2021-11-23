@@ -1,6 +1,8 @@
 package com.hybrid.api;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -27,6 +30,7 @@ import com.hybrid.common.JwtUtils;
 import com.hybrid.repository.RoleRepository;
 import com.hybrid.repository.UserRepository;
 import com.hybrid.request.LoginRequest;
+import com.hybrid.response.BaseDataResponse;
 import com.hybrid.response.BaseResponse;
 import com.hybrid.service.impl.UserDetail;
 import com.hybrid.service.impl.UserDetailsServiceImpl;
@@ -53,30 +57,18 @@ public class LoginAPI {
 	UserDetailsServiceImpl userDetailsService;
 
 	@PostMapping(value = "/api/login")
-	public String login(@Valid @RequestBody LoginRequest loginRequest) {
+	public BaseDataResponse<Map<String, String>> login(@Valid @RequestBody LoginRequest loginRequest) {
+		BaseDataResponse<Map<String, String>> baseDateResponse = new BaseDataResponse<Map<String, String>>();
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
-
 		SecurityContextHolder.getContext().setAuthentication(authentication);
 		String jwt = jwtUtils.generateJwtToken(authentication);
-//        Users users = new Users(loginRequest.getEmail(),
-//                passwordEncoder.encode(loginRequest.getPassword()));
-		UserDetail userDetails = (UserDetail) authentication.getPrincipal();
-		List<String> roles = userDetails.getAuthorities().stream().map(GrantedAuthority::getAuthority)
-				.collect(Collectors.toList());
-		roles.forEach((element) -> {
-			System.out.println("day la gi ? " + element);
-		});
-		// users.setLogin_token(jwt);
-		return jwt;
-//        ResponseEntity.ok(new JwtResponse(
-//                jwt,
-//                200L,
-//                "Login successfully",
-//                userDetails.getId(),
-//                userDetails.getEmail(),
-//                roles
-//       ));
+		Map<String, String> map = new HashMap<String, String>();
+	    map.put("token", jwt);
+		baseDateResponse.setReponseCode(200);
+		baseDateResponse.setMessage("Login successfully");
+		baseDateResponse.setData(map);
+		return baseDateResponse;
 	}
 
 	//@PreAuthorize("hasRole('admin')")
