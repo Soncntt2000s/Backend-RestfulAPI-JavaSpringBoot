@@ -30,4 +30,6 @@ public class PostAPI {
 		return baseListHomePost;
 	}
 	
+	//@GetMapping(value = "api/post/news")
+	
 }
