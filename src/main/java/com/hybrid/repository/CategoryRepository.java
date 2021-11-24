@@ -6,6 +6,4 @@ import com.hybrid.entity.CategoryEntity;
 
 public interface CategoryRepository extends JpaRepository<CategoryEntity, Integer>{
 
-    CategoryEntity findOneById(Integer id);
-
 }

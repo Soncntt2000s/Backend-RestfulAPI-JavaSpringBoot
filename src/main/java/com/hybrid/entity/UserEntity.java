@@ -1,10 +1,7 @@
 package com.hybrid.entity;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,12 +15,11 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Table(name = "users")
-@Data
+@Getter
+@Setter
 public class UserEntity extends BaseEntity {
 
 	@Column(columnDefinition = "tinyint(1) NOT NULL")
@@ -37,14 +33,6 @@ public class UserEntity extends BaseEntity {
 
 	@Column(columnDefinition = "varchar(255) NULL")
 	private String loginToken;
-
-	@CreatedDate
-	@Column(columnDefinition = "timestamp DEFAULT CURRENT_TIMESTAMP")
-	private Timestamp createdAt;
-
-	@LastModifiedDate
-	@Column(columnDefinition = "timestamp NULL DEFAULT NULL")
-	private Timestamp updatedAt;
 
 	@OneToMany(mappedBy = "user")
 	private List<PostEntity> post = new ArrayList<>();
@@ -61,26 +49,68 @@ public class UserEntity extends BaseEntity {
 	@OneToOne(mappedBy = "user")
     private UserProfileEntity userProfile;
 
-	public UserEntity(){
+//	public int getStatus() {
+//		return status;
+//	}
+//
+//	public void setStatus(int status) {
+//		this.status = status;
+//	}
+//
+//	public String getEmail() {
+//		return email;
+//	}
+//
+//	public void setEmail(String email) {
+//		this.email = email;
+//	}
 
-	}
+//	public String getPassword() {
+//		return password;
+//	}
+//
+//	public void setPassword(String password) {
+//		this.password = password;
+//	}
 
-	public UserEntity(List<RoleEntity> roles, int status, String email, String password, String loginToken, Timestamp createdAt, Timestamp updatedAt) {
-		this.roles = roles;
-		this.status = status;
-		this.email = email;
-		this.password = password;
-		this.loginToken = loginToken;
-		this.createdAt = createdAt;
-		this.updatedAt = updatedAt;
-	}
-
-	public UserEntity(List<RoleEntity> roles, int status, String email, String password, Timestamp createdAt) {
-		this.roles = roles;
-		this.status = status;
-		this.email = email;
-		this.password = password;
-		this.createdAt = createdAt;
-	}
+//	public String getLoginToken() {
+//		return loginToken;
+//	}
+//
+//	public void setLoginToken(String loginToken) {
+//		this.loginToken = loginToken;
+//	}
+//
+//	public List<PostEntity> getPost() {
+//		return post;
+//	}
+//
+//	public void setPost(List<PostEntity> post) {
+//		this.post = post;
+//	}
+//
+//	public List<CommentEntity> getComment() {
+//		return comment;
+//	}
+//
+//	public void setComment(List<CommentEntity> comment) {
+//		this.comment = comment;
+//	}
+//
+//	public List<RoleEntity> getRoles() {
+//		return roles;
+//	}
+//
+//	public void setRoles(List<RoleEntity> roles) {
+//		this.roles = roles;
+//	}
+//
+//	public UserProfileEntity getUserProfile() {
+//		return userProfile;
+//	}
+//
+//	public void setUserProfile(UserProfileEntity userProfile) {
+//		this.userProfile = userProfile;
+//	}
 
 }

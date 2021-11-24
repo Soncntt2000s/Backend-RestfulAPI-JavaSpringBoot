@@ -1,18 +1,16 @@
 package com.hybrid.entity;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.NotFound;
-import org.hibernate.annotations.NotFoundAction;
 
 @Getter
 @Setter
@@ -23,19 +21,45 @@ public class CategoryEntity extends BaseEntity {
 	@Column(columnDefinition = "varchar(255) NOT NULL")
 	private String name;
 
-	@Column(name = "category_parent_id")
-	private Integer CategoryParentId;
-
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(name = "category_parent_id",referencedColumnName = "id",
-			columnDefinition = "INT(11) DEFAULT NULL",nullable = true)
-	private List<CategoryEntity> categories = new ArrayList<CategoryEntity>();
+	@Column(columnDefinition = "int(11) NULL")
+	private Integer categoryParentId;
 
 	@Column(columnDefinition = "varchar(255) NOT NULL")
 	private String slug;
 
-	public CategoryEntity(){
+	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
+	private List<PostEntity> post = new ArrayList<>();
 
-	}
+//	public String getName() {
+//		return name;
+//	}
+//
+//	public void setName(String name) {
+//		this.name = name;
+//	}
+//
+//	public int getCategoryParentId() {
+//		return categoryParentId;
+//	}
+//
+//	public void setCategoryParentId(int categoryParentId) {
+//		this.categoryParentId = categoryParentId;
+//	}
+//
+//	public String getSlug() {
+//		return slug;
+//	}
+//
+//	public void setSlug(String slug) {
+//		this.slug = slug;
+//	}
+//
+//	public List<PostEntity> getPost() {
+//		return post;
+//	}
+//
+//	public void setPost(List<PostEntity> post) {
+//		this.post = post;
+//	}
 
 }

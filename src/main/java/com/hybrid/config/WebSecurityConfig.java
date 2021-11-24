@@ -54,13 +54,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().and()
+                .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers(HttpMethod.POST,"/api/login","api/forgot_password").permitAll()
-                .antMatchers("/api/*").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-                .antMatchers("/api/admin/*").access("hasRole('ROLE_ADMIN')")
+                .authorizeRequests().antMatchers("/api/forgot_password", "/api/login").permitAll()
+                //.authorizeRequests().antMatchers().permitAll();
+                //.antMatchers("/api/*").access("hasRole('admin', 'user')")
+                //.antMatchers("/api/*").access("hasRole('user', 'admin')")
+                .antMatchers("/api/*").access("hasAnyRole('ROLE_user', 'ROLE_admin')")
+                .antMatchers("/api/admin/*").access("hasRole('ROLE_admin')")
                 .anyRequest().authenticated();
+        //http.authorizeRequests().antMatchers("/api/*").access("hasAnyRole('ROLE_user', 'ROLE_admin')");
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable();
     }

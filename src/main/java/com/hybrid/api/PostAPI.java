@@ -29,5 +29,7 @@ public class PostAPI {
 		baseListHomePost.setData(postService.getHomePost());
 		return baseListHomePost;
 	}
+	
 	//@GetMapping(value = "api/post/news")
+	
 }
