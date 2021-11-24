@@ -1,7 +1,9 @@
 package com.hybrid.response;
 
 import java.sql.Timestamp;
+import java.util.List;
 
+import com.hybrid.entity.CommentEntity;
 import lombok.Data;
 
 @Data
@@ -9,7 +11,7 @@ public class CommentResponse {
 	
 	private Integer id;
 	
-	private Integer commentParentId;
+	private List<CommentEntity> commentParentId;
 	
 	private Timestamp createAt;
 	

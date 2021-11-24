@@ -57,4 +57,23 @@ public class UserProfileEntity extends BaseEntity{
 	@JoinColumn(name="department_id", columnDefinition = "tinyint(2) NOT NULL")
     private DepartmentEntity department;
 
+	public UserProfileEntity(int status, String fullname, Timestamp birthday,
+							 int gender, String numberPhone, String facebook,
+							 String description, String urlImgAvata, PositionEntity position,
+							 BranchEntity branch, DepartmentEntity department) {
+		this.status = status;
+		this.fullname = fullname;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.numberPhone = numberPhone;
+		this.facebook = facebook;
+		this.description = description;
+		this.urlImgAvata = urlImgAvata;
+		this.position = position;
+		this.branch = branch;
+		this.department = department;
+	}
+
+	public UserProfileEntity() {
+	}
 }

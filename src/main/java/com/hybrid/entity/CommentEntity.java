@@ -1,21 +1,23 @@
 package com.hybrid.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.xml.soap.Text;
 
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "comments")
 public class CommentEntity extends BaseEntity{
-	
+
+	@OneToMany(mappedBy = "id",fetch = FetchType.LAZY)
 	@Column(columnDefinition = "int(11) NULL")
-	private Integer commentParentId;
+	private List<CommentEntity> commentParentId = new ArrayList<>();
 	
 	@Column(columnDefinition = "int(11) default 0 NOT NULL")
 	private int likeNumber;
@@ -23,50 +25,10 @@ public class CommentEntity extends BaseEntity{
 	@Column(columnDefinition = "text NOT NULL")
 	private String content;
 	
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
     private PostEntity post;
 
-	@ManyToOne()
+	@ManyToOne(fetch = FetchType.LAZY)
     private UserEntity user;
 
-//	public int getCommentParentId() {
-//		return commentParentId;
-//	}
-//
-//	public void setCommentParentId(int commentParentId) {
-//		this.commentParentId = commentParentId;
-//	}
-//
-//	public int getLikeNumber() {
-//		return likeNumber;
-//	}
-//
-//	public void setLikeNumber(int likeNumber) {
-//		this.likeNumber = likeNumber;
-//	}
-//
-//	public String getContent() {
-//		return content;
-//	}
-//
-//	public void setContent(String content) {
-//		this.content = content;
-//	}
-//
-//	public PostEntity getPost() {
-//		return post;
-//	}
-//
-//	public void setPost(PostEntity post) {
-//		this.post = post;
-//	}
-//
-//	public UserEntity getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(UserEntity user) {
-//		this.user = user;
-//	}
-	
 }

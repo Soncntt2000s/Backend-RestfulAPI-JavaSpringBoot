@@ -27,5 +27,11 @@ public class BaseResponse {
 		this.message = message;
 	}
 
-	
+	public BaseResponse(int responseCode, String message) {
+		this.responseCode = responseCode;
+		this.message = message;
+	}
+
+	public BaseResponse() {
+	}
 }
