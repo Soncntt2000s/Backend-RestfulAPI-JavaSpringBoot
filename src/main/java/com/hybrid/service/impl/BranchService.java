@@ -15,24 +15,24 @@ import com.hybrid.response.BranchResponse;
 import com.hybrid.service.IBranchService;
 
 @Service
-public class BranchService implements IBranchService{
+public class BranchService implements IBranchService {
 
 	@Autowired
 	private BranchRepository branchRepo;
-	
+
 	@Autowired
 	private BranchConverter branchConverter;
-	
+
 	@Override
 	public List<BranchResponse> getBranch() {
 		List<BranchResponse> listBranchResponse = new ArrayList<>();
 		List<BranchEntity> listBranchEntity = branchRepo.findAll();
 		listBranchEntity.forEach((branchEntity) -> {
 			listBranchResponse.add(branchConverter.toBranhResponse(branchEntity));
-        });
-		return listBranchResponse ;
+		});
+		return listBranchResponse;
 	}
-	
+
 	@Override
 	public BaseResponse save(BranchRequest BranchRequest) {
 		BranchEntity branchEntity = new BranchEntity();
@@ -43,16 +43,22 @@ public class BranchService implements IBranchService{
 		baseResponse.setMessage("Create branch successfully");
 		return baseResponse;
 	}
-	
+
 	@Override
 	public BaseResponse update(BranchRequest BranchRequest, Integer id) {
-		BranchEntity branchEntity = branchRepo.findOneById(id);
-		branchEntity = branchConverter.toUpdateBranhEntity(BranchRequest, id);
-		branchRepo.save(branchEntity);
 		BaseResponse baseResponse = new BaseResponse();
-		baseResponse.setReponseCode(200);
-		baseResponse.setMessage("Update branch successfully");
+		BranchEntity branchEntity = new BranchEntity();
+		BranchEntity oldBranchEntity = branchRepo.findOneById(id);
+		if (oldBranchEntity == null) {
+			baseResponse.setReponseCode(400);
+			baseResponse.setMessage("Branch does not exist");
+		} else {
+			branchEntity = BranchConverter.toUpdateEntity(BranchRequest, oldBranchEntity);
+			branchRepo.save(branchEntity);
+			baseResponse.setReponseCode(200);
+			baseResponse.setMessage("Update branch successfully");
+		}
 		return baseResponse;
 	}
-		
+
 }
