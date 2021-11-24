@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.hybrid.request.PostRequest;
 import com.hybrid.response.BaseResponse;
+import com.hybrid.response.PostDetailResponse;
 import com.hybrid.response.PostResponse;
 
 public interface IPostService {
@@ -13,4 +14,6 @@ public interface IPostService {
 	List<PostResponse> getPost();
 
 	BaseResponse save(PostRequest postRequest, String image);
+
+	PostDetailResponse getPostDetail(Integer id);
 }

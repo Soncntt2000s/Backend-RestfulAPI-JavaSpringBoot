@@ -7,17 +7,23 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import com.hybrid.request.PostRequest;
-import com.hybrid.response.BaseResponse;
-import com.hybrid.response.PostResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hybrid.entity.PostEntity;
 import com.hybrid.repository.PostRepository;
+import com.hybrid.request.BranchRequest;
+import com.hybrid.request.PostRequest;
 import com.hybrid.response.BaseDataResponse;
+import com.hybrid.response.BaseResponse;
+import com.hybrid.response.PostDetailResponse;
+import com.hybrid.response.PostResponse;
 import com.hybrid.service.IPostService;
 
 @RestController
@@ -64,5 +70,14 @@ public class PostAPI {
 
 		String image = imagePath.resolve(postRequest.getImage().getOriginalFilename()).toString();
 		return postService.save(postRequest, image);
+	}
+	
+	@GetMapping(value = "api/post/get/{id}")
+	public BaseDataResponse<PostDetailResponse> getPostDetail(@PathVariable Integer id) {
+		BaseDataResponse<PostDetailResponse> postDetailResponse = new BaseDataResponse<PostDetailResponse>();
+		postDetailResponse.setReponseCode(200);
+		postDetailResponse.setMessage("Get post successfully");
+		postDetailResponse.setData(postService.getPostDetail(id));
+		return postDetailResponse;
 	}
 }
