@@ -34,9 +34,9 @@ public class BranchService implements IBranchService {
 	}
 
 	@Override
-	public BaseResponse save(BranchRequest BranchRequest) {
+	public BaseResponse save(BranchRequest branchRequest) {
 		BranchEntity branchEntity = new BranchEntity();
-		branchEntity = branchConverter.toCreateBranhEntity(BranchRequest);
+		branchEntity = branchConverter.toCreateBranhEntity(branchRequest);
 		branchRepo.save(branchEntity);
 		BaseResponse baseResponse = new BaseResponse();
 		baseResponse.setReponseCode(200);

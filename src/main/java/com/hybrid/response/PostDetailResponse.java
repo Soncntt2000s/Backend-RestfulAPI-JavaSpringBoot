@@ -1,11 +1,14 @@
 package com.hybrid.response;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 import lombok.Data;
 
 @Data
-public class HomePostResponse {
+public class PostDetailResponse {
+	
+	private String createBy;
 	
 	private String title;
 	
@@ -17,4 +20,12 @@ public class HomePostResponse {
 	
 	private String category;
 	
-}
+	private String content;
+	
+	private int likeNumber;
+	
+	private int viewNumber;
+	
+	List<CommentResponse> listCommentResponse;
+	
+}	
