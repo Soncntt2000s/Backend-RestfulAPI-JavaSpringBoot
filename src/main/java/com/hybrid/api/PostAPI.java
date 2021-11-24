@@ -10,12 +10,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hybrid.entity.PostEntity;
 import com.hybrid.repository.PostRepository;
+import com.hybrid.request.BranchRequest;
 import com.hybrid.request.PostRequest;
 import com.hybrid.response.BaseDataResponse;
 import com.hybrid.response.BaseResponse;
@@ -66,5 +69,20 @@ public class PostAPI {
 
 		String image = imagePath.resolve(postRequest.getImage().getOriginalFilename()).toString();
 		return postService.save(postRequest, image);
+	}
+	
+	@GetMapping(value = "api/post/get/{id}")
+	public BaseDataResponse<List<PostResponse>> getPost() {
+		BaseDataResponse<List<PostResponse>> baseListHomePost = new BaseDataResponse<List<PostResponse>>();
+		baseListHomePost.setReponseCode(200);
+		baseListHomePost.setMessage("Get post successfully");
+		baseListHomePost.setData(postService.getHomePost());
+		return baseListHomePost;
+	}
+	
+	@PutMapping(value = "/api/admin/branch/{id}")
+	public BaseResponse updateBranch(@RequestBody BranchRequest banchRequest, @PathVariable Integer id)
+	{
+		return branchService.update(banchRequest, id);
 	}
 }
