@@ -5,7 +5,9 @@ import java.sql.Timestamp;
 import lombok.Data;
 
 @Data
-public class HomePostResponse {
+public class PostResponse {
+	
+	private String createBy;
 	
 	private String title;
 	
@@ -17,4 +19,9 @@ public class HomePostResponse {
 	
 	private String category;
 	
+	private String content;
+	
+	private int likeNumber;
+	
+	private int viewNumber;
 }

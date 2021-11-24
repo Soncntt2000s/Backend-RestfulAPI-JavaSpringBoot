@@ -42,22 +42,4 @@ public class PasswordAPI {
 		return userService.changePassword(changePasswordRequest);
 	}
 	
-	
-	//Đoạn code này dùng để bắt lỗi valid request
-	@ResponseStatus(HttpStatus.BAD_REQUEST)
-	@ExceptionHandler(MethodArgumentNotValidException.class)
-	public BaseResponse handleValidationExceptions(
-	  MethodArgumentNotValidException ex) {
-		BaseResponse baseDTO = new BaseResponse();
-	    baseDTO.setReponseCode(401);
-	    //Map<String, String> errors = new HashMap<>();
-//	    ex.getBindingResult().getAllErrors().forEach((error) -> {
-//	        //String fieldName = ((FieldError) error).getField();
-//	        String errorMessage = error.getDefaultMessage();
-//	        //errors.put(fieldName, errorMessage);
-//	        baseDTO.setMessage(errorMessage);
-//	    });
-	    baseDTO.setMessage(ex.getBindingResult().getFieldError().getDefaultMessage());
-	    return baseDTO;
-	}
 }

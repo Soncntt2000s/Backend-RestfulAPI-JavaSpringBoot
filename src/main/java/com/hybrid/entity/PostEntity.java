@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -40,71 +41,10 @@ public class PostEntity extends BaseEntity{
 	@ManyToOne()
     private UserEntity user;
 	
+	@ManyToMany(mappedBy = "posts")
+    private List<UserEntity> listUser = new ArrayList<>();
+	
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
 	private List<CommentEntity> comment = new ArrayList<>();
 
-//	public int getViewNumber() {
-//		return viewNumber;
-//	}
-//
-//	public void setViewNumber(int viewNumber) {
-//		this.viewNumber = viewNumber;
-//	}
-//
-//	public String getTitle() {
-//		return title;
-//	}
-//
-//	public void setTitle(String title) {
-//		this.title = title;
-//	}
-//
-//	public String getUrlImg() {
-//		return urlImg;
-//	}
-//
-//	public void setUrlImg(String urlImg) {
-//		this.urlImg = urlImg;
-//	}
-//
-//	public String getMiniText() {
-//		return miniText;
-//	}
-//
-//	public void setMiniText(String miniText) {
-//		this.miniText = miniText;
-//	}
-//
-//	public String getContent() {
-//		return content;
-//	}
-//
-//	public void setContent(String content) {
-//		this.content = content;
-//	}
-//
-//	public CategoryEntity getCategory() {
-//		return category;
-//	}
-//
-//	public void setCategory(CategoryEntity category) {
-//		this.category = category;
-//	}
-//
-//	public UserEntity getUser() {
-//		return user;
-//	}
-//
-//	public void setUser(UserEntity user) {
-//		this.user = user;
-//	}
-//
-//	public List<CommentEntity> getComment() {
-//		return comment;
-//	}
-//
-//	public void setComment(List<CommentEntity> comment) {
-//		this.comment = comment;
-//	}
-	
 }
