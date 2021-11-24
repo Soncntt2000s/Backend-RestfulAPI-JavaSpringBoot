@@ -6,4 +6,6 @@ import com.hybrid.entity.DepartmentEntity;
 
 public interface DepartmentRepository extends JpaRepository<DepartmentEntity, Integer>{
 
+    DepartmentEntity findByName(String name);
+
 }

@@ -11,5 +11,7 @@ public interface BranchRepository extends JpaRepository<BranchEntity, Integer>{
 	List<BranchEntity> findAll();
 	
 	BranchEntity findOneById(Integer id);
+
+	BranchEntity findByName(String name);
 	
 }
