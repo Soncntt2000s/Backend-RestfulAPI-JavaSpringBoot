@@ -70,6 +70,7 @@ public class UserRequest {
     public void setCreatedAt(Timestamp createdAt) {
         this.createdAt = createdAt;
     }
+
     @JsonProperty("updated_at")
     public Timestamp getUpdatedAt() {
         return updatedAt;

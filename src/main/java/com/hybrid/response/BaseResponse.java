@@ -1,6 +1,8 @@
 package com.hybrid.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 public class BaseResponse {
 	

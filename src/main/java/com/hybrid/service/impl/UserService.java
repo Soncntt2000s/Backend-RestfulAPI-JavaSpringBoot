@@ -1,7 +1,9 @@
 package com.hybrid.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.mail.MessagingException;
@@ -174,7 +176,7 @@ public class UserService implements IUserService {
 	@Override
 	public UserEntity createUser(UserRequest userRequest) {
 		Set<String> stringRole = userRequest.getRole();
-		Set<RoleEntity> roles = new HashSet<>();
+		List<RoleEntity> roles = new ArrayList<>();
 
 		if(stringRole == null){
 			RoleEntity userRole = roleRepository.findOneByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException(" Role is not found."));

@@ -23,8 +23,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Table(name = "users")
-@Getter
-@Setter
+@Data
 public class UserEntity extends BaseEntity {
 
 	@Column(columnDefinition = "tinyint(1) NOT NULL")
@@ -57,7 +56,7 @@ public class UserEntity extends BaseEntity {
 	@JoinTable(name = "user_role",
 	joinColumns = @JoinColumn(name = "user_id", columnDefinition = "int NOT NULL"),
 	inverseJoinColumns = @JoinColumn(name = "role_id", columnDefinition = "int NOT NULL"))
-	private Set<RoleEntity> roles = new HashSet<>();
+	private List<RoleEntity> roles = new ArrayList<>();
 	
 	@OneToOne(mappedBy = "user")
     private UserProfileEntity userProfile;
@@ -66,7 +65,7 @@ public class UserEntity extends BaseEntity {
 
 	}
 
-	public UserEntity(Set<RoleEntity> roles, int status, String email, String password, String loginToken, Timestamp createdAt, Timestamp updatedAt) {
+	public UserEntity(List<RoleEntity> roles, int status, String email, String password, String loginToken, Timestamp createdAt, Timestamp updatedAt) {
 		this.roles = roles;
 		this.status = status;
 		this.email = email;
@@ -76,7 +75,7 @@ public class UserEntity extends BaseEntity {
 		this.updatedAt = updatedAt;
 	}
 
-	public UserEntity(Set<RoleEntity> roles, int status, String email, String password, Timestamp createdAt) {
+	public UserEntity(List<RoleEntity> roles, int status, String email, String password, Timestamp createdAt) {
 		this.roles = roles;
 		this.status = status;
 		this.email = email;
@@ -84,19 +83,4 @@ public class UserEntity extends BaseEntity {
 		this.createdAt = createdAt;
 	}
 
-	public Set<RoleEntity> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<RoleEntity> roles) {
-		this.roles = roles;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
 }

@@ -1,5 +1,6 @@
 package com.hybrid;
 
+import com.hybrid.response.BaseResponse;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.SpringApplication;
 

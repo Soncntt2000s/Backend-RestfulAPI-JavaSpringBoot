@@ -12,10 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
-@EnableAutoConfiguration
-@RequestMapping("/api/admin")
+@RestController
 public class UserAPI {
 
     @Autowired
@@ -27,20 +26,19 @@ public class UserAPI {
     /*
    Create user by check role user or admin to add Database
     */
-    @PostMapping("/create-user")
+    @PostMapping("/api/admin/create-user")
     public BaseResponse createUser(@RequestBody UserRequest userRequest){
+        BaseResponse baseResponse = new BaseResponse();
         if(iUserService.checkExistEmail(userRequest.getEmail())){
-            BaseResponse baseResponse = new BaseResponse();
+
             baseResponse.setReponseCode(400);
             baseResponse.setMessage("Email is already exist");
-            System.out.println("xac thuc email " + baseResponse);
-            return baseResponse;
         }
-        iUserService.createUser(userRequest);
-        BaseResponse baseResponse = new BaseResponse();
-        baseResponse.setReponseCode(200);
-        baseResponse.setMessage("xac thuc thanh cong " + "SUCCESFULLY");
-        System.out.println(baseResponse);
+        else {
+            iUserService.createUser(userRequest);
+            baseResponse.setReponseCode(200);
+            baseResponse.setMessage( "SUCCESFULLY");
+        }
         return baseResponse;
     }
 }
