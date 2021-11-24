@@ -22,6 +22,7 @@ import com.hybrid.request.BranchRequest;
 import com.hybrid.request.PostRequest;
 import com.hybrid.response.BaseDataResponse;
 import com.hybrid.response.BaseResponse;
+import com.hybrid.response.PostDetailResponse;
 import com.hybrid.response.PostResponse;
 import com.hybrid.service.IPostService;
 
@@ -72,17 +73,11 @@ public class PostAPI {
 	}
 	
 	@GetMapping(value = "api/post/get/{id}")
-	public BaseDataResponse<List<PostResponse>> getPost() {
-		BaseDataResponse<List<PostResponse>> baseListHomePost = new BaseDataResponse<List<PostResponse>>();
-		baseListHomePost.setReponseCode(200);
-		baseListHomePost.setMessage("Get post successfully");
-		baseListHomePost.setData(postService.getHomePost());
-		return baseListHomePost;
-	}
-	
-	@PutMapping(value = "/api/admin/branch/{id}")
-	public BaseResponse updateBranch(@RequestBody BranchRequest banchRequest, @PathVariable Integer id)
-	{
-		return branchService.update(banchRequest, id);
+	public BaseDataResponse<PostDetailResponse> getPostDetail(@PathVariable Integer id) {
+		BaseDataResponse<PostDetailResponse> postDetailResponse = new BaseDataResponse<PostDetailResponse>();
+		postDetailResponse.setReponseCode(200);
+		postDetailResponse.setMessage("Get post successfully");
+		postDetailResponse.setData(postService.getPostDetail(id));
+		return postDetailResponse;
 	}
 }

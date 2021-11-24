@@ -15,9 +15,9 @@ import lombok.Setter;
 public class CommentEntity extends BaseEntity{
 	
 	@Column(columnDefinition = "int(11) NULL")
-	private int commentParentId;
+	private Integer commentParentId;
 	
-	@Column(columnDefinition = "int(11) NOT NULL")
+	@Column(columnDefinition = "int(11) default 0 NOT NULL")
 	private int likeNumber;
 	
 	@Column(columnDefinition = "text NOT NULL")

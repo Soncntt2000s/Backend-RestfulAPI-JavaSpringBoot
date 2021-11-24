@@ -11,5 +11,7 @@ public interface PostRepository extends JpaRepository<PostEntity, Integer>{
 	List<PostEntity> findTop5ByOrderByCreatedAtDesc();
 	
 	List<PostEntity> findTop12ByOrderByCreatedAtDesc();
-	
+
+	PostEntity findOneById(Integer id);
+		
 }
