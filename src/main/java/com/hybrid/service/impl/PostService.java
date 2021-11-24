@@ -7,9 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
+import com.hybrid.converter.CommentConverter;
 import com.hybrid.converter.PostConverter;
 import com.hybrid.entity.BranchEntity;
 import com.hybrid.entity.CategoryEntity;
+import com.hybrid.entity.CommentEntity;
 import com.hybrid.entity.PostEntity;
 import com.hybrid.entity.UserEntity;
 import com.hybrid.repository.CategoryRepository;
@@ -18,6 +20,8 @@ import com.hybrid.repository.UserRepository;
 import com.hybrid.request.BranchRequest;
 import com.hybrid.request.PostRequest;
 import com.hybrid.response.BaseResponse;
+import com.hybrid.response.CommentResponse;
+import com.hybrid.response.PostDetailResponse;
 import com.hybrid.response.PostResponse;
 import com.hybrid.service.IPostService;
 
@@ -35,6 +39,9 @@ public class PostService implements IPostService{
 	
 	@Autowired
 	private PostConverter postConverter;
+	
+	@Autowired
+	private CommentConverter commentConverter;
 	
 	@Override
 	public List<PostResponse> getHomePost() {
@@ -68,6 +75,17 @@ public class PostService implements IPostService{
 		baseResponse.setReponseCode(200);
 		baseResponse.setMessage("Create branch successfully");
 		return baseResponse;
+	}
+	
+	@Override
+	public PostDetailResponse getPostDetail(Integer id) {
+		PostEntity postEntity = postRepo.findOneById(id);
+		List<CommentResponse> listCommentResponse = new ArrayList<>();
+		postEntity.getListComment().forEach((commentEntity) -> {
+			listCommentResponse.add(commentConverter.toCommentResponse(commentEntity));
+        });
+		PostDetailResponse postDetailResponse = postConverter.toPostDetailResponse(postEntity, listCommentResponse);
+		return postDetailResponse ;
 	}
 
 }

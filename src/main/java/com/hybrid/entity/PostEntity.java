@@ -45,6 +45,6 @@ public class PostEntity extends BaseEntity{
     private List<UserEntity> listUser = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
-	private List<CommentEntity> comment = new ArrayList<>();
+	private List<CommentEntity> listComment = new ArrayList<>();
 
 }
