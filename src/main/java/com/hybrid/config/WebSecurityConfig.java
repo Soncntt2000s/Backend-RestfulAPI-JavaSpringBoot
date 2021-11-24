@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     UserDetailsServiceImpl userDetailsService;
 
     @Autowired
-   private AuthEntryPointJwt unauthorizedHandler;
+    private AuthEntryPointJwt unauthorizedHandler;
 
     @Bean
     public AuthTokenFilter authenticationJwtTokenFilter(){
@@ -54,17 +54,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
+                .csrf().and()
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-                .authorizeRequests().antMatchers("/api/forgot_password", "/api/login").permitAll()
-                //.authorizeRequests().antMatchers().permitAll();
-                //.antMatchers("/api/*").access("hasRole('admin', 'user')")
-                //.antMatchers("/api/*").access("hasRole('user', 'admin')")
-                .antMatchers("/api/*").access("hasAnyRole('ROLE_user', 'ROLE_admin')")
-                .antMatchers("/api/admin/*").access("hasRole('ROLE_admin')")
+                .authorizeRequests().antMatchers(HttpMethod.POST,"/api/login","api/forgot_password").permitAll()
+                .antMatchers("/api/*").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+                .antMatchers("/api/admin/*").access("hasRole('ROLE_ADMIN')")
+
                 .anyRequest().authenticated();
-        //http.authorizeRequests().antMatchers("/api/*").access("hasAnyRole('ROLE_user', 'ROLE_admin')");
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable();
     }
