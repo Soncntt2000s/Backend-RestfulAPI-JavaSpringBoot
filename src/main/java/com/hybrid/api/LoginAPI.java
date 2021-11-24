@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.hybrid.common.CustomException;
 import com.hybrid.common.JwtUtils;
 import com.hybrid.repository.RoleRepository;
 import com.hybrid.repository.UserRepository;
@@ -57,7 +58,7 @@ public class LoginAPI {
 	UserDetailsServiceImpl userDetailsService;
 
 	@PostMapping(value = "/api/login")
-	public BaseDataResponse<Map<String, String>> login(@Valid @RequestBody LoginRequest loginRequest) {
+	public BaseDataResponse<Map<String, String>> login(@Valid @RequestBody LoginRequest loginRequest){
 		BaseDataResponse<Map<String, String>> baseDateResponse = new BaseDataResponse<Map<String, String>>();
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
@@ -71,7 +72,6 @@ public class LoginAPI {
 		return baseDateResponse;
 	}
 
-	//@PreAuthorize("hasRole('admin')")
 	@GetMapping(value = "/api/testbaomat")
 	public UserDetail testabc() {
 		UserDetail userDetail = (UserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();

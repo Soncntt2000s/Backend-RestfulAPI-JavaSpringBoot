@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -21,45 +23,21 @@ public class CategoryEntity extends BaseEntity {
 	@Column(columnDefinition = "varchar(255) NOT NULL")
 	private String name;
 
-	@Column(columnDefinition = "int(11) NULL")
-	private Integer categoryParentId;
+//	@Column(columnDefinition = "int(11) NULL")
+//	private Integer categoryParentId;
 
 	@Column(columnDefinition = "varchar(255) NOT NULL")
 	private String slug;
 
 	@OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
 	private List<PostEntity> post = new ArrayList<>();
-
-//	public String getName() {
-//		return name;
-//	}
-//
-//	public void setName(String name) {
-//		this.name = name;
-//	}
-//
-//	public int getCategoryParentId() {
-//		return categoryParentId;
-//	}
-//
-//	public void setCategoryParentId(int categoryParentId) {
-//		this.categoryParentId = categoryParentId;
-//	}
-//
-//	public String getSlug() {
-//		return slug;
-//	}
-//
-//	public void setSlug(String slug) {
-//		this.slug = slug;
-//	}
-//
-//	public List<PostEntity> getPost() {
-//		return post;
-//	}
-//
-//	public void setPost(List<PostEntity> post) {
-//		this.post = post;
-//	}
+	
+	@OneToMany
+    @JoinColumn(name = "catagory_parent_id",referencedColumnName = "id"
+            ,columnDefinition = "int(11) default NULL")
+    private List<CategoryEntity> listCategory = new ArrayList<>();
+	
+	@Column(name = "catagory_parent_id", insertable = false, updatable = false)
+	private Integer categoryParentId;
 
 }
