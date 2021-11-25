@@ -1,10 +1,16 @@
 package com.hybrid.request;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Value;
 
 import java.sql.Timestamp;
 import java.util.Set;
+
+
 
 @Data
 public class UserRequest {
@@ -17,7 +23,9 @@ public class UserRequest {
     private Timestamp updatedAt;
     private Set<String> role;
 
+
     public UserRequest(int status, String email, String password, String loginToken, Timestamp createdAt, Timestamp updatedAt, Set<String> role) {
+
         this.status = status;
         this.email = email;
         this.password = password;
@@ -27,31 +35,37 @@ public class UserRequest {
         this.role = role;
     }
 
+    @JsonProperty("status")
     public int isStatus() {
         return status;
     }
 
+    @JsonProperty("status")
     public void setStatus(int status) {
         this.status = status;
     }
 
+    @JsonProperty("email")
     public String getEmail() {
         return email;
     }
 
+    @JsonProperty("email")
     public void setEmail(String email) {
         this.email = email;
     }
 
+    @JsonProperty("password")
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty("password")
     public void setPassword(String password) {
         this.password = password;
     }
 
-
+    @JsonProperty("login_token")
     public String getLoginToken() {
         return loginToken;
     }
@@ -81,10 +95,12 @@ public class UserRequest {
         this.updatedAt = updatedAt;
     }
 
+    @JsonProperty("role")
     public Set<String> getRole() {
         return role;
     }
 
+    @JsonProperty("role")
     public void setRole(Set<String> role) {
         this.role = role;
     }
