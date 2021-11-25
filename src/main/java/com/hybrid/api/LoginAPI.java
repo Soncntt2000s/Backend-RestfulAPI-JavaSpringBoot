@@ -77,15 +77,5 @@ public class LoginAPI {
 		UserDetail userDetail = (UserDetail) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return userDetail;
 	}
-	
 
-//	@ExceptionHandler
-//	@ResponseBody
-//	@ResponseStatus(HttpStatus.FORBIDDEN)
-//	public BaseResponse handleValidationExceptions(MethodArgumentNotValidException ex) {
-//		BaseResponse baseDTO = new BaseResponse();
-//		baseDTO.setReponseCode(403);
-//		baseDTO.setMessage("không có quyền");
-//		return baseDTO;
-//	}
 }

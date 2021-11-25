@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.hybrid.service.impl.UserDetailsServiceImpl;
+import org.springframework.security.web.header.writers.StaticHeadersWriter;
 
 
 @Configuration
@@ -58,11 +59,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests().antMatchers(HttpMethod.POST,"/api/login","api/forgot_password").permitAll()
+                .antMatchers(HttpMethod.GET,"/images/*").permitAll()
                 .antMatchers("/api/*").access("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
                 .antMatchers("/api/admin/*").access("hasRole('ROLE_ADMIN')")
 
                 .anyRequest().authenticated();
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class)
                 .csrf().disable();
+        http.headers().addHeaderWriter(
+                new StaticHeadersWriter("Access-Control-Allow-Origin", "{'http://localhost:3000'}"));
     }
 }

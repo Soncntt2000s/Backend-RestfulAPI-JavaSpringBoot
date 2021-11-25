@@ -16,7 +16,7 @@ public class CustomException{
     @ResponseStatus(value = HttpStatus.UNAUTHORIZED)
     public BaseResponse loginFalse() {
         BaseResponse baseResponse = new BaseResponse();
-        baseResponse.setMessage("tài khoản hoặc mk sai");
+        baseResponse.setMessage("Tài khoản hoặc mật khẩu sai ! Xin thử lại.");
         baseResponse.setReponseCode(400);
         return baseResponse;
     }
@@ -25,7 +25,7 @@ public class CustomException{
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public BaseResponse Role(AuthenticationException ex) {
         BaseResponse baseResponse = new BaseResponse();
-        baseResponse.setMessage("tài khoản hoặc mk sai");
+        baseResponse.setMessage("Tài khoản hoặc mật khẩu sai ! Xin thử lại. ");
         baseResponse.setReponseCode(400);
         return baseResponse;
     }

@@ -37,7 +37,7 @@ public class UserAPI {
         else {
             iUserService.createUser(userRequest);
             baseResponse.setReponseCode(200);
-            baseResponse.setMessage( "SUCCESFULLY");
+            baseResponse.setMessage( "SUCCESSFULLY");
         }
         return baseResponse;
     }

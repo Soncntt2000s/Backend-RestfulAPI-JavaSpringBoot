@@ -58,7 +58,7 @@ public class UserEntity extends BaseEntity {
 	private List<RoleEntity> roles = new ArrayList<>();
 
 	@ManyToMany
-	@JoinTable(name = "like_number",
+	@JoinTable(name = "comments",
 			joinColumns = @JoinColumn(name = "user_id", columnDefinition = "int"),
 			inverseJoinColumns = @JoinColumn(name = "post_id", columnDefinition = "int"))
 	private List<PostEntity> posts = new ArrayList<>();
