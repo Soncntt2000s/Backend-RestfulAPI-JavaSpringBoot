@@ -7,6 +7,7 @@ import com.hybrid.converter.BranchConverter;
 import com.hybrid.entity.BranchEntity;
 import com.hybrid.request.CategoryRequest;
 import com.hybrid.response.BaseResponse;
+import com.hybrid.response.CategoryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -36,6 +37,17 @@ public class CategoryService implements ICategoryService{
         });
 		return listHomeCategoryResponse;
 	}
+
+	@Override
+	public List<CategoryResponse> getAllCategory() {
+		List<CategoryResponse> listCategoryResponse = new ArrayList<>();
+		List<CategoryEntity> listCategoryEntity = categoryRepo.findAll();
+		listCategoryEntity.forEach((categoryEntity)-> {
+			listCategoryResponse.add(categoryConverter.toGetAllCategoryEntity(categoryEntity));
+		});
+		return listCategoryResponse;
+	}
+
 
 	@Override
 	public BaseResponse saveCategory(CategoryRequest categoryRequest) {

@@ -3,6 +3,7 @@ package com.hybrid.converter;
 import com.hybrid.entity.BranchEntity;
 import com.hybrid.request.BranchRequest;
 import com.hybrid.request.CategoryRequest;
+import com.hybrid.response.CategoryResponse;
 import org.springframework.stereotype.Component;
 
 import com.hybrid.entity.CategoryEntity;
@@ -39,5 +40,17 @@ public class CategoryConverter {
 		categoryEntity.setCategoryParentId(categoryRequest.getCategoryParentId());
 		categoryEntity.setSlug(categoryRequest.getSlug());
 		return categoryEntity;
+	}
+
+	public CategoryResponse toGetAllCategoryEntity(CategoryEntity categoryEntity)
+	{
+		CategoryResponse categoryResponse = new CategoryResponse();
+		categoryResponse.setId(categoryEntity.getId());
+		categoryResponse.setCategoryParentId(categoryEntity.getCategoryParentId());
+		categoryResponse.setName(categoryEntity.getName());
+		categoryResponse.setSlug(categoryEntity.getSlug());
+		categoryResponse.setCreatedAt(categoryEntity.getCreatedAt());
+		categoryResponse.setUpdatedAt(categoryEntity.getUpdatedAt());
+		return categoryResponse;
 	}
 }

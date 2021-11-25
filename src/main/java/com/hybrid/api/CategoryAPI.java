@@ -5,6 +5,7 @@ import java.util.List;
 import com.hybrid.entity.CategoryEntity;
 import com.hybrid.request.CategoryRequest;
 import com.hybrid.response.BaseResponse;
+import com.hybrid.response.CategoryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,12 +23,21 @@ public class CategoryAPI {
 	private CategoryRepository categoryRepo;
 	
 	@GetMapping(value = "/api/categories/get")
-	public BaseDataResponse< List<HomeCategoryResponse>> getBranch() {
-		BaseDataResponse< List<HomeCategoryResponse>> baseListBranch = new BaseDataResponse< List<HomeCategoryResponse>>();
-			baseListBranch.setReponseCode(200);
-			baseListBranch.setMessage("Get Category successfully");
-			baseListBranch.setData(categoryService.getHomeCategory());
-		return baseListBranch;
+	public BaseDataResponse< List<HomeCategoryResponse>> getHomeCategory() {
+		BaseDataResponse< List<HomeCategoryResponse>> baseListCategory = new BaseDataResponse< List<HomeCategoryResponse>>();
+		baseListCategory.setReponseCode(200);
+		baseListCategory.setMessage("Get Category successfully");
+		baseListCategory.setData(categoryService.getHomeCategory());
+		return baseListCategory;
+	}
+
+	@GetMapping(value = "/api/admin/categories/get")
+	public BaseDataResponse< List<CategoryResponse>> getHomeCategory2() {
+		BaseDataResponse< List<CategoryResponse>> baseListCategory = new BaseDataResponse< List<CategoryResponse>>();
+		baseListCategory.setReponseCode(200);
+		baseListCategory.setMessage("Get All Category successfully");
+		baseListCategory.setData(categoryService.getAllCategory());
+		return baseListCategory;
 	}
 
 	@PostMapping("/api/admin/category")
