@@ -32,7 +32,7 @@ public class UserDetail implements UserDetails {
 
     public static UserDetail build(UserEntity userEntity){
         List<GrantedAuthority> authorities = userEntity.getRoles().stream()
-                .map(roles -> new SimpleGrantedAuthority(roles.getName()))
+                .map(roles -> new SimpleGrantedAuthority(roles.getName().name()))
                 .collect(Collectors.toList());
         return new UserDetail(
         		userEntity.getId(),
@@ -41,7 +41,6 @@ public class UserDetail implements UserDetails {
                 authorities
         );
     }
-
 
 
     @Override

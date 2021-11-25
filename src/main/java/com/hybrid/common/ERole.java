@@ -1,6 +1,6 @@
 package com.hybrid.common;
 
 public enum ERole {
-    User,
-    Admin
+    ROLE_USER,
+    ROLE_ADMIN
 }

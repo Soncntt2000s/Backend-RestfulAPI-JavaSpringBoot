@@ -28,7 +28,6 @@ public class PostConverter {
 		homePostResponse.setContent(entity.getContent());
 		homePostResponse.setCreateBy(entity.getUser().getUserProfile().getFullname());
 		homePostResponse.setViewNumber(entity.getViewNumber());
-		homePostResponse.setLikeNumber(entity.getListUser().size());
 		return homePostResponse;
 	}
 	

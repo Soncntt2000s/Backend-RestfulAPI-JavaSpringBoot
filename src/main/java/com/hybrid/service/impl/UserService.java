@@ -1,11 +1,21 @@
 package com.hybrid.service.impl;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
+import com.hybrid.common.ERole;
+import com.hybrid.entity.RoleEntity;
+import com.hybrid.repository.RoleRepository;
+import com.hybrid.request.UserRequest;
+import com.hybrid.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,6 +23,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.hybrid.entity.BaseEntity;
@@ -25,9 +36,12 @@ import com.hybrid.request.ResetPasswordRequest;
 import com.hybrid.response.BaseResponse;
 
 @Service
-public class UserService {
+public class UserService implements IUserService {
 	@Autowired
 	private UserRepository userRepo;
+
+	@Autowired
+	private RoleRepository roleRepository;
 
 	@Autowired
 	private ForgotPasswordRepository forgotRepo;
@@ -37,6 +51,9 @@ public class UserService {
 	
 	@Autowired
 	AuthenticationManager authenticationManager;
+
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public BaseResponse forgotPassword(String token, String email) {
 		BaseResponse baseResponse = new BaseResponse();
@@ -150,4 +167,45 @@ public class UserService {
     	}
     	return baseResponse;
     }
+
+	@Override
+	public Boolean checkExistEmail(String email){
+		return userRepo.existsByEmail(email);
+	}
+
+	@Override
+	public UserEntity createUser(UserRequest userRequest) {
+		Set<String> stringRole = userRequest.getRole();
+		List<RoleEntity> roles = new ArrayList<>();
+
+		if(stringRole == null){
+			RoleEntity userRole = roleRepository.findOneByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException(" Role is not found."));
+			roles.add(userRole);
+		} else {
+			stringRole.forEach(role -> {
+				switch (role){
+					case "ROLE_ADMIN" :
+						RoleEntity adminRole = roleRepository.findOneByName(ERole.ROLE_ADMIN).orElseThrow(() -> new RuntimeException(" Role is not found."));
+						roles.add(adminRole);
+						break;
+					case "ROLE_USER" :
+						RoleEntity userRole = roleRepository.findOneByName(ERole.ROLE_USER).orElseThrow(() -> new RuntimeException(" Role is not found."));
+						roles.add(userRole);
+						break;
+					default:
+						break;
+				}
+			});
+		}
+		UserEntity users = new UserEntity(roles,
+				userRequest.getStatus(),
+				userRequest.getEmail(),
+				passwordEncoder.encode(userRequest.getPassword()),
+				userRequest.getLoginToken(),
+				userRequest.getCreatedAt(),
+				userRequest.getUpdatedAt());
+		users.setRoles(roles);
+		return userRepo.save(users);
+	}
+
 }
