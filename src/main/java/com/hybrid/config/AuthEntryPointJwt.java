@@ -19,6 +19,6 @@ public class AuthEntryPointJwt implements AuthenticationEntryPoint, Serializable
     public void commence(HttpServletRequest request, HttpServletResponse response,
                          AuthenticationException authException) throws IOException {
 
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "abc");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Error Unauthorized");
     }
 }

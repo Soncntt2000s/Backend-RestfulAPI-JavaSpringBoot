@@ -15,7 +15,7 @@ public class CommentConverter {
 		commentResponse.setContent(entity.getContent());
 		commentResponse.setCreateAt(entity.getCreatedAt());
 		commentResponse.setCreateBy(entity.getUser().getUserProfile().getFullname());
-		commentResponse.setCommentParentId(entity.getCommentParentId());
+		commentResponse.setCommentParentId(entity.getListCommentParent());
 		commentResponse.setLikeNumber(entity.getLikeNumber());
 		return commentResponse;
 	}

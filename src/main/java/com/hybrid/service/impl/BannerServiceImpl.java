@@ -36,7 +36,7 @@ public class BannerServiceImpl implements BannerService {
     public BaseResponse create(@RequestParam String title,
                                @RequestParam String content,
                                @RequestParam MultipartFile image) throws IOException {
-        Path staticPath = Paths.get("static");
+        Path staticPath = Paths.get("src/main/resources/static");
         Path imagePath = Paths.get("images");
         if (!Files.exists(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath))) {
             Files.createDirectories(CURRENT_FOLDER.resolve(staticPath).resolve(imagePath));
@@ -53,7 +53,7 @@ public class BannerServiceImpl implements BannerService {
         BannersEntity banners = new BannersEntity();
             banners.setTitle(title);
             banners.setContent(content);
-            banners.setImage(imagePath.resolve(image.getOriginalFilename()).toString());
+            banners.setImage("http://localhost:8081/images/"+ image.getOriginalFilename());
          bannersRepository.save(banners);
          return new BaseResponse(
                  200,
@@ -83,14 +83,14 @@ public class BannerServiceImpl implements BannerService {
                 baseResponse.setReponseCode(401);
                 baseResponse.setMessage("Error update!");
         }else {
-            Path staticPath = Paths.get("static");
+            Path staticPath = Paths.get("src/main/resources/static");
             Path imagePath = Paths.get("images");
             Path file = CURRENT_FOLDER.resolve(staticPath)
                     .resolve(imagePath).resolve(image.getOriginalFilename());
             BannersEntity bannersEntity = bannersRepository.getById(id);
             bannersEntity.setTitle(title);
             bannersEntity.setContent(content);
-            bannersEntity.setImage(imagePath.resolve(image.getOriginalFilename()).toString());
+            bannersEntity.setImage("http://localhost:8081/images/"+ image.getOriginalFilename());
             bannersEntity.setUpdatedAt(Timestamp.valueOf(updatedAt));
             bannersRepository.save(bannersEntity);
             baseResponse.setReponseCode(200);
